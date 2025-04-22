@@ -2,6 +2,8 @@ import { Alert, Button, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchArrayAction } from "../Redux/Action";
 import { useEffect } from "react";
+import { fetchArrayExperience } from "../Redux/Action";
+import { useLocation } from "react-router-dom";
 
 const Prova = () => {
   const dispatch = useDispatch();
@@ -11,21 +13,23 @@ const Prova = () => {
   const isError = useSelector((state) => state.fetch.isError);
 
   //   Metodo con useEffect (1)
-  //   useEffect(() => {
-  //     dispatch(
-  //       fetchArrayAction("https://striveschool-api.herokuapp.com/api/profile/me")
-  //     );
-  //   }, [dispatch]);
+  useEffect(() => {
+    dispatch(
+      fetchArrayAction("https://striveschool-api.herokuapp.com/api/profile/me")
+    );
+  }, [dispatch]);
 
   return (
     <>
       {/* metodo con il bottone (2) */}
-      <h4>Prova componente</h4>
-      {/* <Button
+      {/* <h4>Prova componente</h4>
+      <Button
         onClick={() =>
           dispatch(
-            fetchArrayAction(
-              "https://striveschool-api.herokuapp.com/api/profile/me"
+            fetchArrayExperience(
+              "https://striveschool-api.herokuapp.com/api/profile/" +
+                profile._id +
+                "/experiences"
             )
           )
         }
@@ -33,7 +37,7 @@ const Prova = () => {
         Carica Profilo
       </Button> */}
 
-      {isLoading && <Spinner variant="success" animation="border"></Spinner>}
+      {/* {isLoading && <Spinner variant="success" animation="border"></Spinner>}
       {isError && (
         <Alert variant="danger">Errore nel caricamento del profilo</Alert>
       )}
@@ -54,7 +58,7 @@ const Prova = () => {
           </p>
           <img src={profile.image} />
         </div>
-      )}
+      )} */}
     </>
   );
 };

@@ -1,11 +1,13 @@
-import { Button } from "react-bootstrap"
-import { Col } from "react-bootstrap"
-import ListGroup from "react-bootstrap/ListGroup"
+import { Button } from "react-bootstrap";
+import { Col } from "react-bootstrap";
+import ListGroup from "react-bootstrap/ListGroup";
 
 function Sidebar() {
   function truncateText(text, maxLength = 63) {
-    if (!text) return ""
-    return text.length > maxLength ? text.slice(0, maxLength - 3) + "..." : text
+    if (!text) return "";
+    return text.length > maxLength
+      ? text.slice(0, maxLength - 3) + "..."
+      : text;
   }
   return (
     <Col sm={12} lg={3}>
@@ -130,7 +132,7 @@ function Sidebar() {
         </ListGroup.Item>
       </ListGroup>
     </Col>
-  )
+  );
 }
 
-export default Sidebar
+export default Sidebar;
