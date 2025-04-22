@@ -2,16 +2,22 @@ export const FETCH_ARRAY_ACTION = "FETCH_ARRAY_ACTION";
 export const FETCH_ARRAY_IS_LOADING = "FETCH_ARRAY_IS_LOADING";
 export const FETCH_ARRAY_IS_ERROR = "FETCH_ARRAY_IS_ERROR";
 
-export const fetchArrayAction = () => {
+export const fetchArrayAction = (endpoint) => {
   return async (dispatch) => {
-    const baseEndpoint =
-      "https://striveschool-api.herokuapp.com/api/profile/me";
+    // Endpoint del profilo =
+    //   "https://striveschool-api.herokuapp.com/api/profile/me";
+
+    //Endpoint Lista =
+    // https://striveschool-api.herokuapp.com/api/profile/
+
+    // Endpoint Specifico id
+    // https://striveschool-api.herokuapp.com/api/profile/:userId
 
     const pierattiliotoken =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NWRkM2Q0NTE4MTAwMTVjZTgzZDQiLCJpYXQiOjE3NDUzMTMyMzYsImV4cCI6MTc0NjUyMjgzNn0.1nb5bTwFZyxSFdHoFu9ITxAAdGeQ6LtV1ZolKHc4D88";
     dispatch({ type: FETCH_ARRAY_IS_LOADING });
     try {
-      const response = await fetch(baseEndpoint, {
+      const response = await fetch(endpoint, {
         headers: {
           Authorization: `Bearer ${pierattiliotoken}`,
         },

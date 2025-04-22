@@ -10,16 +10,26 @@ const Prova = () => {
   const isLoading = useSelector((state) => state.fetch.isLoading);
   const isError = useSelector((state) => state.fetch.isError);
 
-  //Metodo con useEffect (1)
+  //   Metodo con useEffect (1)
   //   useEffect(() => {
-  //     dispatch(fetchArrayAction());
+  //     dispatch(
+  //       fetchArrayAction("https://striveschool-api.herokuapp.com/api/profile/me")
+  //     );
   //   }, [dispatch]);
 
   return (
     <>
       {/* metodo con il bottone (2) */}
-      {/* <h4>Prova componente</h4>
-      <Button onClick={() => dispatch(fetchArrayAction())}>
+      <h4>Prova componente</h4>
+      {/* <Button
+        onClick={() =>
+          dispatch(
+            fetchArrayAction(
+              "https://striveschool-api.herokuapp.com/api/profile/me"
+            )
+          )
+        }
+      >
         Carica Profilo
       </Button> */}
 
