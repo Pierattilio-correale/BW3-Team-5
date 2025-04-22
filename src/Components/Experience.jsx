@@ -1,19 +1,29 @@
 import { useEffect, useState } from "react";
-import { Col, ListGroup, ListGroupItem, Modal, Form } from "react-bootstrap";
+import {
+  Col,
+  ListGroup,
+  ListGroupItem,
+  Modal,
+  Form,
+  Alert,
+  Spinner,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchArrayAction } from "../Redux/Action";
 import { fetchArrayExperience } from "../Redux/Action";
+import { useNavigate } from "react-router-dom";
 
 const pierattiliotoken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NWRkM2Q0NTE4MTAwMTVjZTgzZDQiLCJpYXQiOjE3NDUzMTMyMzYsImV4cCI6MTc0NjUyMjgzNn0.1nb5bTwFZyxSFdHoFu9ITxAAdGeQ6LtV1ZolKHc4D88";
 
 const Experience = function () {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const profile = useSelector((state) => state.fetch.profile);
   const experienceArray = useSelector((state) => state.company.experiences);
-  const isLoading = useSelector((state) => state.fetch.isLoading);
-  const isError = useSelector((state) => state.fetch.isError);
+  const isLoading = useSelector((state) => state.company.isLoading);
+  const isError = useSelector((state) => state.company.isError);
   const [formData, setFormData] = useState({
     role: "",
     company: "",
@@ -83,7 +93,12 @@ const Experience = function () {
                 <a href="#" onClick={handleShow} className="text-dark me-4">
                   <i class="bi bi-plus-lg"></i>
                 </a>
-                <a href="#" className="text-dark mx-3">
+                <a
+                  className="text-dark mx-3"
+                  onClick={() => {
+                    navigate("/experience/" + profile._id);
+                  }}
+                >
                   <i
                     className="bi bi-pencil"
                     style={{ fontSize: "1.4rem" }}
@@ -191,6 +206,15 @@ const Experience = function () {
               </Modal.Footer>
             </Modal>
           </ListGroup.Item>
+          {isLoading && (
+            <div className="d-flex justify-content-center">
+              <Spinner variant="primary" animation="border"></Spinner>
+            </div>
+          )}
+          {isError && (
+            <Alert variant="danger">Errore nel recupero della lista</Alert>
+          )}
+
           {experienceArray?.map((exp) => (
             <ListGroupItem key={exp._id}>
               <h5>{exp.role}</h5>

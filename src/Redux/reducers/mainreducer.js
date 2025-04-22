@@ -5,7 +5,7 @@ import {
 } from "../Action";
 
 const initialState = {
-  experience: [],
+  experiences: [],
   isLoading: false,
   isError: false,
 };

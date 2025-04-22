@@ -1,7 +1,7 @@
 export const FETCH_ARRAY_ACTION = "FETCH_ARRAY_ACTION";
 export const FETCH_ARRAY_IS_LOADING = "FETCH_ARRAY_IS_LOADING";
 export const FETCH_ARRAY_IS_ERROR = "FETCH_ARRAY_IS_ERROR";
-export const FETCH_ARRAY_EXPERIENCE = "FETCH_ARRAY_IS_ERROR";
+export const FETCH_ARRAY_EXPERIENCE = "FETCH_ARRAY_EXPERIENCE";
 
 export const fetchArrayAction = (endpoint) => {
   return async (dispatch) => {
@@ -58,6 +58,7 @@ export const fetchArrayExperience = (endpoint) => {
           Authorization: `Bearer ${pierattiliotoken}`,
         },
       });
+
       if (response.ok) {
         const data = await response.json();
         console.log("Response Data:", data);
