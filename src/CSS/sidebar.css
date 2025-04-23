@@ -1,0 +1,5 @@
+.name-hover:hover {
+  color: #0a66c2; /* LinkedIn blue */
+  text-decoration: underline;
+  cursor: pointer;
+}

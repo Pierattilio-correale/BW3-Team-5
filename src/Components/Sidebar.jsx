@@ -1,6 +1,7 @@
 import { Button } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 import ListGroup from "react-bootstrap/ListGroup";
+import "../CSS/sidebar.css";
 
 function Sidebar() {
   function truncateText(text, maxLength = 63) {
@@ -41,7 +42,7 @@ function Sidebar() {
               alt="Profile"
             />
             <div>
-              <h6 className="mb-0">Luca Nobili</h6>
+              <h6 className="mb-0 name-hover">Luca Ferrara</h6>
               <p className="mb-1 small text-secondary">
                 {truncateText(
                   "security+ | BTL1 | EJPT | SOC | Analyst 1 livello @ istituto gsdkjghfskl"
@@ -66,7 +67,7 @@ function Sidebar() {
               alt="Profile"
             />
             <div>
-              <h6 className="mb-0">Stefano Furnari</h6>
+              <h6 className="mb-0 name-hover">Pieratilio Correale</h6>
               <p className="mb-1 small text-secondary">
                 {truncateText("Ethical Hacker @Wallife")}
               </p>
@@ -89,10 +90,58 @@ function Sidebar() {
               alt="Profile"
             />
             <div>
-              <h6 className="mb-0">Fabiana Cappelli</h6>
+              <h6 className="mb-0 name-hover">Stella</h6>
               <p className="mb-1 small text-secondary">
                 {truncateText(
                   "🧩 Data Entry 🧩 Junior Data Analyst 🧩 assistente virtuale"
+                )}
+              </p>
+              <Button
+                className="rounded-pill"
+                variant="outline-secondary"
+                size="sm"
+              >
+                <i className="bi bi-person-fill-add"></i> Collegati
+              </Button>
+            </div>
+          </div>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <div className="d-flex align-items-start">
+            <img
+              className="rounded-circle me-3"
+              style={{ width: "48px", height: "48px", objectFit: "cover" }}
+              src="http://placecats.com/600/400"
+              alt="Profile"
+            />
+            <div>
+              <h6 className="mb-0 name-hover">Andrea Nika</h6>
+              <p className="mb-1 small text-secondary">
+                {truncateText("Just a programmer trying to make end's meet")}
+              </p>
+              <Button
+                className="rounded-pill"
+                variant="outline-secondary"
+                size="sm"
+              >
+                <i className="bi bi-person-fill-add"></i> Collegati
+              </Button>
+            </div>
+          </div>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <div className="d-flex align-items-start">
+            <img
+              className="rounded-circle me-3"
+              style={{ width: "48px", height: "48px", objectFit: "cover" }}
+              src="http://placecats.com/800/900"
+              alt="Profile"
+            />
+            <div>
+              <h6 className="mb-0 name-hover">Felice Liparuli</h6>
+              <p className="mb-1 small text-secondary">
+                {truncateText(
+                  "security+ | BTL1 | EJPT | SOC | Analyst 1 livello @ istituto..."
                 )}
               </p>
               <Button
@@ -114,7 +163,7 @@ function Sidebar() {
               alt="Profile"
             />
             <div>
-              <h6 className="mb-0">Luca Nobili</h6>
+              <h6 className="mb-0 name-hover">Noa</h6>
               <p className="mb-1 small text-secondary">
                 {truncateText(
                   "security+ | BTL1 | EJPT | SOC | Analyst 1 livello @ istituto..."
