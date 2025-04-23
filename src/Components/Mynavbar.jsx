@@ -20,6 +20,9 @@ import {
 } from "react-icons/fa";
 import { IoMdGrid } from "react-icons/io";
 import './navbar.css'
+import { Link } from "react-router-dom";
+
+
 function MyNavbar() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
@@ -51,9 +54,9 @@ function MyNavbar() {
   {/* Logo */}
 
   <div className="d-flex align-items-center ">
-  <Navbar.Brand href="#" className="text-primary fs-1 ms-2 ms-lg-5 me-1 pt-0 mt-2">
-    <FaLinkedin size={55} />
-  </Navbar.Brand>
+  <Navbar.Brand as={Link} to="/" className="text-primary fs-1 ms-2 ms-lg-5 me-1 pt-0 mt-2">
+  <FaLinkedin size={55} />
+</Navbar.Brand>
 
   {/* Search desktop: visibile solo da lg in su */}
   <div className="position-relative d-none d-lg-flex ms-3 flex-grow-1">
@@ -94,7 +97,11 @@ function MyNavbar() {
         style={{ cursor: "pointer" }}
         onClick={() => setShowMobileSearch(true)}
       />
-      <FaHome size={40} className="text-secondary glow-icon" />
+    <Nav.Link as={Link} to="/" className="d-flex flex-column align-items-center">
+  <FaHome size={40} className="glow-icon" />
+  <span className="d-none d-lg-block text-secondary">Home</span>
+</Nav.Link>
+
       <FaUserFriends size={40} className="text-secondary glow-icon" />
       <FaBriefcase size={40} className="text-secondary glow-icon" />
       <FaCommentDots size={40} className="text-secondary glow-icon" />
@@ -194,7 +201,11 @@ function MyNavbar() {
 <Col md={5} className="d-none d-lg-block ms-lg-5 ps-lg-5 fs-6">
 
             <Nav className="d-flex justify-content-between justify-content-lg-start align-items-center gap-lg-5 ps-2 ps-lg-2 mt-3 py-0" navbarScroll>
-              <NavItem icon={<FaHome size={30} className="glow-icon" />} label="Home" />
+            <Nav.Link as={Link} to="/" className="d-flex flex-column align-items-center">
+  <FaHome size={30} className="glow-icon" />
+  <span className="d-none d-lg-block text-secondary">Home</span>
+</Nav.Link>
+
               <NavItem icon={<FaUserFriends size={30} className="glow-icon" />} label="Rete" />
               <NavItem icon={<FaBriefcase size={30} className="glow-icon" />} label="Lavoro" />
               <NavItem icon={<FaCommentDots size={30} className="glow-icon" />} label="Messaggistica" />
