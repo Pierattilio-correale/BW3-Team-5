@@ -91,7 +91,7 @@ const Experience = function () {
               Experience
               <div>
                 <a href="#" onClick={handleShow} className="text-dark me-4">
-                  <i class="bi bi-plus-lg"></i>
+                  <i className="bi bi-plus-lg"></i>
                 </a>
                 <a
                   className="text-dark mx-3"

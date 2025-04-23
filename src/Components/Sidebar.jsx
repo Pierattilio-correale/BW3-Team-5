@@ -28,13 +28,13 @@ function Sidebar() {
       <ListGroup className="mb-3 ms-3">
         <ListGroup.Item>
           <h3 className="d-flex justify-content-between">
-            Lingua del profilo <i class="bi bi-pen"></i>
+            Lingua del profilo <i className="bi bi-pen"></i>
           </h3>
           <p className="text-secondary">italiano</p>
         </ListGroup.Item>
         <ListGroup.Item>
           <h3 className="d-flex justify-content-between">
-            Profilo pubblico e URL <i class="bi bi-pen"></i>
+            Profilo pubblico e URL <i className="bi bi-pen"></i>
           </h3>
           <p className="text-secondary">
             www.linkedin.com/in/{profile.username}-{profile._id}
