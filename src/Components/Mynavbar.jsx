@@ -20,7 +20,11 @@ import {
 } from "react-icons/fa";
 import { IoMdGrid } from "react-icons/io";
 import './navbar.css'
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
+import {  useNavigate 
+
+ } from "react-router-dom";
 
 
 function MyNavbar() {
@@ -45,6 +49,46 @@ function MyNavbar() {
 
   const [showBusinessDropdown, setShowBusinessDropdown] = useState(false);
 
+  //funzione JOBS PER LA SEARCHBAR
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
+  const getJobs = async () => {
+    if (!searchTerm.trim()) return;
+  
+    try {
+      // Caso speciale per "allevatori"
+      if (searchTerm.toLowerCase().includes("allevatori")) {
+        const fakeJob = {
+          _id: "fake001",
+          title: "Allevatori di pulcini da combattimento",
+          company_name: "Pulcini Inc.",
+          category: "Zoologia Estrema",
+          candidate_required_location: "Remoto o Gabbie rinforzate",
+          publication_date: new Date().toISOString(),
+          url: "/jobs/fake001", // o un URL fittizio
+        };
+  
+        navigate(`/results?company=${searchTerm}`, { state: { jobs: [fakeJob] } });
+        return;
+      }
+  
+      // Caso normale
+      const response = await fetch(
+        `https://strive-benchmark.herokuapp.com/api/jobs?company=${searchTerm}`
+      );
+      if (response.ok) {
+        const { data } = await response.json();
+        navigate(`/results?company=${searchTerm}`, { state: { jobs: data } });
+      } else {
+        alert("Errore durante la fetch");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  
   return (
     <Navbar expand="lg" className="bg-white border-bottom border-secondary py-0">
       <Container fluid>
@@ -60,35 +104,53 @@ function MyNavbar() {
 
   {/* Search desktop: visibile solo da lg in su */}
   <div className="position-relative d-none d-lg-flex ms-3 flex-grow-1">
-    <FaSearch className="position-absolute top-50 translate-middle-y ms-3 text-muted" />
-    <Form.Control
-      type="search"
-      placeholder="Cerca"
-      className="ps-5 py-2 bg-secondary-subtle fs-6 w-100 mt-1"
-      aria-label="Search"
-    />
-  </div>
+  <FaSearch className="position-absolute top-50 translate-middle-y ms-3 text-muted" />
+  <Form.Control
+  type="text"
+  placeholder="Cerca"
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      getJobs();
+    }
+  }}
+  className="ps-5 py-2 bg-secondary-subtle fs-6 w-100 mt-1"
+  aria-label="Search"
+/>
+
+</div>
+
 </div>
 
 
   {/* Mobile search active (copre icone) */}
   {showMobileSearch ? (
-    <div className="d-flex d-lg-none align-items-center gap-2 justify-content-end">
-      <Form.Control
-        type="text"
-        placeholder="Cerca"
-        className="form-control w-100 py-1 px-3"
-        autoFocus
-      />
-      <button
-        type="button"
-        className="btn btn-outline-secondary"
-        onClick={() => setShowMobileSearch(false)}
-      >
-        ✕
-      </button>
-    </div>
-  ) : (
+  <div className="d-flex d-lg-none align-items-center gap-2 justify-content-end">
+    <Form.Control
+      type="text"
+      placeholder="Cerca"
+      className="form-control w-100 py-1 px-3"
+      autoFocus
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          getJobs();
+        }
+      }}
+    />
+    <button
+      type="button"
+      className="btn btn-outline-secondary"
+      onClick={() => setShowMobileSearch(false)}
+    >
+      ✕
+    </button>
+  </div>
+) : (
     // Mobile: logo + icone orizzontali
     <div className="d-flex align-items-center justify-content-end flex-grow-1 gap-3 d-lg-none me-2">
       <FaSearch
