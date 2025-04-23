@@ -41,7 +41,7 @@ export const fetchArrayAction = (endpoint) => {
   };
 };
 
-export const fetchArrayExperience = (endpoint) => {
+export const fetchArrayExperience = (endpoint, pierattiliotoken) => {
   return async (dispatch) => {
     //     - GET https://striveschool-api.herokuapp.com/api/profile/:userId/experiences // Ritorna una lista di experiences
     // - POST https://striveschool-api.herokuapp.com/api/profile/:userId/experiences // Crea una nuova experience. NOTA: ogni utente ha il permesso di creare/modificare solo le proprie esperienze
@@ -49,8 +49,7 @@ export const fetchArrayExperience = (endpoint) => {
     // - PUT https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/:expId // Modifica una specifica experience
     // - DELETE https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/:expId // Elimina una specifica experience
 
-    const pierattiliotoken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NWRkM2Q0NTE4MTAwMTVjZTgzZDQiLCJpYXQiOjE3NDUzMTMyMzYsImV4cCI6MTc0NjUyMjgzNn0.1nb5bTwFZyxSFdHoFu9ITxAAdGeQ6LtV1ZolKHc4D88";
+    // const pierattiliotoken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NWRkM2Q0NTE4MTAwMTVjZTgzZDQiLCJpYXQiOjE3NDUzMTMyMzYsImV4cCI6MTc0NjUyMjgzNn0.1nb5bTwFZyxSFdHoFu9ITxAAdGeQ6LtV1ZolKHc4D88";
     dispatch({ type: FETCH_ARRAY_IS_LOADING });
     try {
       const response = await fetch(endpoint, {

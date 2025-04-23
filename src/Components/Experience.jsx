@@ -35,7 +35,10 @@ const Experience = function () {
 
   useEffect(() => {
     dispatch(
-      fetchArrayAction("https://striveschool-api.herokuapp.com/api/profile/me")
+      fetchArrayAction(
+        "https://striveschool-api.herokuapp.com/api/profile/me",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NWRkM2Q0NTE4MTAwMTVjZTgzZDQiLCJpYXQiOjE3NDUzMTMyMzYsImV4cCI6MTc0NjUyMjgzNn0.1nb5bTwFZyxSFdHoFu9ITxAAdGeQ6LtV1ZolKHc4D88"
+      )
     );
   }, [dispatch]);
 
@@ -43,7 +46,8 @@ const Experience = function () {
     if (profile && profile._id) {
       dispatch(
         fetchArrayExperience(
-          `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`
+          `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`,
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NWRkM2Q0NTE4MTAwMTVjZTgzZDQiLCJpYXQiOjE3NDUzMTMyMzYsImV4cCI6MTc0NjUyMjgzNn0.1nb5bTwFZyxSFdHoFu9ITxAAdGeQ6LtV1ZolKHc4D88"
         )
       );
     }
@@ -72,7 +76,8 @@ const Experience = function () {
         handleClose();
         dispatch(
           fetchArrayExperience(
-            `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`
+            `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`,
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NWRkM2Q0NTE4MTAwMTVjZTgzZDQiLCJpYXQiOjE3NDUzMTMyMzYsImV4cCI6MTc0NjUyMjgzNn0.1nb5bTwFZyxSFdHoFu9ITxAAdGeQ6LtV1ZolKHc4D88"
           )
         );
       } else {
@@ -270,7 +275,8 @@ const Experience = function () {
 
                         dispatch(
                           fetchArrayExperience(
-                            `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`
+                            `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`,
+                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NWRkM2Q0NTE4MTAwMTVjZTgzZDQiLCJpYXQiOjE3NDUzMTMyMzYsImV4cCI6MTc0NjUyMjgzNn0.1nb5bTwFZyxSFdHoFu9ITxAAdGeQ6LtV1ZolKHc4D88"
                           )
                         );
                       } else {
