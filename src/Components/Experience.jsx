@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 import {
   Col,
   ListGroup,
@@ -7,23 +7,23 @@ import {
   Form,
   Alert,
   Spinner,
-} from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchArrayAction } from "../Redux/Action";
-import { fetchArrayExperience } from "../Redux/Action";
-import { useNavigate } from "react-router-dom";
+} from "react-bootstrap"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchArrayAction } from "../Redux/Action"
+import { fetchArrayExperience } from "../Redux/Action"
+import { useNavigate } from "react-router-dom"
 
 const pierattiliotoken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NWRkM2Q0NTE4MTAwMTVjZTgzZDQiLCJpYXQiOjE3NDUzMTMyMzYsImV4cCI6MTc0NjUyMjgzNn0.1nb5bTwFZyxSFdHoFu9ITxAAdGeQ6LtV1ZolKHc4D88";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NWRkM2Q0NTE4MTAwMTVjZTgzZDQiLCJpYXQiOjE3NDUzMTMyMzYsImV4cCI6MTc0NjUyMjgzNn0.1nb5bTwFZyxSFdHoFu9ITxAAdGeQ6LtV1ZolKHc4D88"
 
 const Experience = function () {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const profile = useSelector((state) => state.fetch.profile);
-  const experienceArray = useSelector((state) => state.company.experiences);
-  const isLoading = useSelector((state) => state.company.isLoading);
-  const isError = useSelector((state) => state.company.isError);
+  const profile = useSelector((state) => state.fetch.profile)
+  const experienceArray = useSelector((state) => state.company.experiences)
+  const isLoading = useSelector((state) => state.company.isLoading)
+  const isError = useSelector((state) => state.company.isError)
   const [formData, setFormData] = useState({
     role: "",
     company: "",
@@ -31,13 +31,13 @@ const Experience = function () {
     endDate: "",
     description: "",
     area: "",
-  });
+  })
 
   useEffect(() => {
     dispatch(
       fetchArrayAction("https://striveschool-api.herokuapp.com/api/profile/me")
-    );
-  }, [dispatch]);
+    )
+  }, [dispatch])
 
   useEffect(() => {
     if (profile && profile._id) {
@@ -45,14 +45,14 @@ const Experience = function () {
         fetchArrayExperience(
           `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`
         )
-      );
+      )
     }
-  }, [dispatch, profile]);
+  }, [dispatch, profile])
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   const FormPUT = async () => {
     try {
@@ -66,22 +66,22 @@ const Experience = function () {
           },
           body: JSON.stringify(formData),
         }
-      );
+      )
       if (response.ok) {
-        alert("Esperienza salvata!");
-        handleClose();
+        alert("Esperienza salvata!")
+        handleClose()
         dispatch(
           fetchArrayExperience(
             `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`
           )
-        );
+        )
       } else {
-        throw new Error("Errore nel salvataggio");
+        throw new Error("Errore nel salvataggio")
       }
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
-  };
+  }
   return (
     <>
       <Col sm={9} className="">
@@ -96,7 +96,7 @@ const Experience = function () {
                 <a
                   className="text-dark mx-3"
                   onClick={() => {
-                    navigate("/experience/" + profile._id);
+                    navigate("/experience/" + profile._id)
                   }}
                 >
                   <i
@@ -222,13 +222,21 @@ const Experience = function () {
                 {exp.company} - {exp.area}
               </p>
               <p>{exp.description}</p>
-              <p>data d'inizio {exp.startDate}</p>
-              <p>data fine : {exp.endDate || "In corso"}</p>
+              <p>
+                data d'inizio:{" "}
+                {new Date(exp.startDate).toLocaleDateString("it-IT")}
+              </p>
+              <p>
+                data fine:{" "}
+                {exp.endDate
+                  ? new Date(exp.endDate).toLocaleDateString("it-IT")
+                  : "In corso"}
+              </p>
             </ListGroupItem>
           ))}
         </ListGroup>
       </Col>
     </>
-  );
-};
-export default Experience;
+  )
+}
+export default Experience
