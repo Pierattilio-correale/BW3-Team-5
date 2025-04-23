@@ -1,30 +1,103 @@
-import { Button, Col, ListGroup } from "react-bootstrap"
-import "../CSS/sidebar.css"
-import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
-import { fetchArrayAction } from "../Redux/Action"
+import { Button, Col, ListGroup } from "react-bootstrap";
+import "../CSS/sidebar.css";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 function Sidebar() {
-  const dispatch = useDispatch()
-  const profile = useSelector((state) => state.fetch.profile)
-
-  useEffect(() => {
-    dispatch(
-      fetchArrayAction(
-        "https://striveschool-api.herokuapp.com/api/profile/68074579d451810015ce83cd"
-      ),
-      fetchArrayAction(
-        "https://striveschool-api.herokuapp.com/api/profile/68075dd3d451810015ce83d4"
-      ),
-      fetchArrayAction(
-        "https://striveschool-api.herokuapp.com/api/profile/68076152d451810015ce83d5"
-      )
+  const profile = useSelector((state) => state.fetch.profile);
+  const [data, setData] = useState(null);
+  const [data2, setData2] = useState(null);
+  const [data3, setData3] = useState(null);
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NDU3OWQ0NTE4MTAwMTVjZTgzY2QiLCJpYXQiOjE3NDUzMDcwNTUsImV4cCI6MTc0NjUxNjY1NX0.T2ztF0EcceV08HgbelOhBcrDNgP_xOKHw2GrBZn-vVc";
+  const getProfile1 = () => {
+    fetch(
+      "https://striveschool-api.herokuapp.com/api/profile/68074579d451810015ce83cd",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     )
-  }, [dispatch])
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("errore nella fetch");
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        setData(data);
+      })
+      .catch((err) => {
+        console.log("errore nella promis", err);
+      });
+  };
+  useEffect(() => {
+    getProfile1();
+  }, []);
+  const getProfile2 = () => {
+    fetch(
+      "https://striveschool-api.herokuapp.com/api/profile/68076152d451810015ce83d5",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("errore nella fetch");
+        }
+      })
+      .then((data2) => {
+        console.log(data2);
+        setData2(data2);
+      })
+      .catch((err) => {
+        console.log("errore nella promis", err);
+      });
+  };
+  useEffect(() => {
+    getProfile2();
+  }, []);
+
+  const getProfile3 = () => {
+    fetch(
+      "https://striveschool-api.herokuapp.com/api/profile/68075dd3d451810015ce83d4",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("errore nella fetch");
+        }
+      })
+      .then((data3) => {
+        console.log(data3);
+        setData3(data3);
+      })
+      .catch((err) => {
+        console.log("errore nella promis", err);
+      });
+  };
+  useEffect(() => {
+    getProfile3();
+  }, []);
 
   function truncateText(text, maxLength = 63) {
-    if (!text) return ""
-    return text.length > maxLength ? text.slice(0, maxLength - 3) + "..." : text
+    if (!text) return "";
+    return text.length > maxLength
+      ? text.slice(0, maxLength - 3) + "..."
+      : text;
   }
 
   return (
@@ -61,15 +134,15 @@ function Sidebar() {
             />
             <div>
               <h6 className="mb-0 name-hover">
-                {profile?.name} {profile?.surname}
+                {data?.name} {data?.surname}
               </h6>
               <p className="mb-1 small text-secondary">
-                {truncateText(profile?.title)}
+                {truncateText(data?.title)}
               </p>
               <p className="mb-1 small text-secondary">
-                {truncateText(profile?.bio)}
+                {truncateText(data?.bio)}
               </p>
-              <p className="mb-1 small text-secondary">📍 {profile?.area}</p>
+              <p className="mb-1 small text-secondary">📍 {data?.area}</p>
               <Button
                 className="rounded-pill"
                 variant="outline-secondary"
@@ -85,20 +158,20 @@ function Sidebar() {
             <img
               className="rounded-circle me-3"
               style={{ width: "48px", height: "48px", objectFit: "cover" }}
-              src={profile?.image || "http://placehold.it/48x48"}
+              src={data2?.image || "http://placehold.it/48x48"}
               alt="Profile"
             />
             <div>
               <h6 className="mb-0 name-hover">
-                {profile?.name} {profile?.surname}
+                {data2?.name} {data2?.surname}
               </h6>
               <p className="mb-1 small text-secondary">
-                {truncateText(profile?.title)}
+                {truncateText(data2?.title)}
               </p>
               <p className="mb-1 small text-secondary">
-                {truncateText(profile?.bio)}
+                {truncateText(data2?.bio)}
               </p>
-              <p className="mb-1 small text-secondary">📍 {profile?.area}</p>
+              <p className="mb-1 small text-secondary">📍 {data2?.area}</p>
               <Button
                 className="rounded-pill"
                 variant="outline-secondary"
@@ -109,25 +182,26 @@ function Sidebar() {
             </div>
           </div>
         </ListGroup.Item>
+
         <ListGroup.Item>
           <div className="d-flex align-items-start">
             <img
               className="rounded-circle me-3"
               style={{ width: "48px", height: "48px", objectFit: "cover" }}
-              src={profile?.image || "http://placehold.it/48x48"}
+              src={data3?.image || "http://placehold.it/48x48"}
               alt="Profile"
             />
             <div>
               <h6 className="mb-0 name-hover">
-                {profile?.name} {profile?.surname}
+                {data3?.name} {data3?.surname}
               </h6>
               <p className="mb-1 small text-secondary">
-                {truncateText(profile?.title)}
+                {truncateText(data3?.title)}
               </p>
               <p className="mb-1 small text-secondary">
-                {truncateText(profile?.bio)}
+                {truncateText(data3?.bio)}
               </p>
-              <p className="mb-1 small text-secondary">📍 {profile?.area}</p>
+              <p className="mb-1 small text-secondary">📍 {data3?.area}</p>
               <Button
                 className="rounded-pill"
                 variant="outline-secondary"
@@ -140,7 +214,7 @@ function Sidebar() {
         </ListGroup.Item>
       </ListGroup>
     </Col>
-  )
+  );
 }
 
-export default Sidebar
+export default Sidebar;
