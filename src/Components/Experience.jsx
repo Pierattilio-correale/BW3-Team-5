@@ -243,9 +243,16 @@ const Experience = function () {
                 {exp.company} - {exp.area}
               </p>
               <p>{exp.description}</p>
-              <p>Data d'inizio: {exp.startDate}</p>
-              <p>Data fine: {exp.endDate || "In corso"}</p>
-
+              <p>
+                data d'inizio:{" "}
+                {new Date(exp.startDate).toLocaleDateString("it-IT")}
+              </p>
+              <p>
+                data fine:{" "}
+                {exp.endDate
+                  ? new Date(exp.endDate).toLocaleDateString("it-IT")
+                  : "In corso"}
+              </p>
               <Form
                 onSubmit={(e) => {
                   e.preventDefault();

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import ScrollActionBar from "./Scrollbar";
 import {
   Navbar,
   Container,
@@ -20,6 +21,13 @@ import {
 } from "react-icons/fa";
 import { IoMdGrid } from "react-icons/io";
 import './navbar.css'
+import { Link } from 'react-router-dom';
+
+import {  useNavigate 
+
+ } from "react-router-dom";
+
+
 function MyNavbar() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
@@ -42,6 +50,46 @@ function MyNavbar() {
 
   const [showBusinessDropdown, setShowBusinessDropdown] = useState(false);
 
+  //funzione JOBS PER LA SEARCHBAR
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
+  const getJobs = async () => {
+    if (!searchTerm.trim()) return;
+  
+    try {
+      // Caso speciale per "allevatori"
+      if (searchTerm.toLowerCase().includes("allevatori")) {
+        const fakeJob = {
+          _id: "fake001",
+          title: "Allevatori di pulcini da combattimento",
+          company_name: "Pulcini Inc.",
+          category: "Zoologia Estrema",
+          candidate_required_location: "Remoto o Gabbie rinforzate",
+          publication_date: new Date().toISOString(),
+          url: "/jobs/fake001", // o un URL fittizio
+        };
+  
+        navigate(`/results?company=${searchTerm}`, { state: { jobs: [fakeJob] } });
+        return;
+      }
+  
+      // Caso normale
+      const response = await fetch(
+        `https://strive-benchmark.herokuapp.com/api/jobs?company=${searchTerm}`
+      );
+      if (response.ok) {
+        const { data } = await response.json();
+        navigate(`/results?company=${searchTerm}`, { state: { jobs: data } });
+      } else {
+        alert("Errore durante la fetch");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  
   return (
     <Navbar expand="lg" className="bg-white border-bottom border-secondary py-0">
       <Container fluid>
@@ -51,41 +99,59 @@ function MyNavbar() {
   {/* Logo */}
 
   <div className="d-flex align-items-center ">
-  <Navbar.Brand href="#" className="text-primary fs-1 ms-2 ms-lg-5 me-1 pt-0 mt-2">
-    <FaLinkedin size={55} />
-  </Navbar.Brand>
+  <Navbar.Brand as={Link} to="/" className="text-primary fs-1 ms-2 ms-lg-5 me-1 pt-0 mt-2">
+  <FaLinkedin size={55} />
+</Navbar.Brand>
 
   {/* Search desktop: visibile solo da lg in su */}
   <div className="position-relative d-none d-lg-flex ms-3 flex-grow-1">
-    <FaSearch className="position-absolute top-50 translate-middle-y ms-3 text-muted" />
-    <Form.Control
-      type="search"
-      placeholder="Cerca"
-      className="ps-5 py-2 bg-secondary-subtle fs-6 w-100 mt-1"
-      aria-label="Search"
-    />
-  </div>
+  <FaSearch className="position-absolute top-50 translate-middle-y ms-3 text-muted" />
+  <Form.Control
+  type="text"
+  placeholder="Cerca"
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      getJobs();
+    }
+  }}
+  className="ps-5 py-2 bg-secondary-subtle fs-6 w-100 mt-1"
+  aria-label="Search"
+/>
+
+</div>
+
 </div>
 
 
   {/* Mobile search active (copre icone) */}
   {showMobileSearch ? (
-    <div className="d-flex d-lg-none align-items-center gap-2 justify-content-end">
-      <Form.Control
-        type="text"
-        placeholder="Cerca"
-        className="form-control w-100 py-1 px-3"
-        autoFocus
-      />
-      <button
-        type="button"
-        className="btn btn-outline-secondary"
-        onClick={() => setShowMobileSearch(false)}
-      >
-        ✕
-      </button>
-    </div>
-  ) : (
+  <div className="d-flex d-lg-none align-items-center gap-2 justify-content-end">
+    <Form.Control
+      type="text"
+      placeholder="Cerca"
+      className="form-control w-100 py-1 px-3"
+      autoFocus
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          getJobs();
+        }
+      }}
+    />
+    <button
+      type="button"
+      className="btn btn-outline-secondary"
+      onClick={() => setShowMobileSearch(false)}
+    >
+      ✕
+    </button>
+  </div>
+) : (
     // Mobile: logo + icone orizzontali
     <div className="d-flex align-items-center justify-content-end flex-grow-1 gap-3 d-lg-none me-2">
       <FaSearch
@@ -94,10 +160,20 @@ function MyNavbar() {
         style={{ cursor: "pointer" }}
         onClick={() => setShowMobileSearch(true)}
       />
-      <FaHome size={40} className="text-secondary glow-icon" />
-      <FaUserFriends size={40} className="text-secondary glow-icon" />
+    <Nav.Link as={Link} to="/" className="d-flex flex-column align-items-center">
+  <FaHome size={40} className="glow-icon" />
+  <span className="d-none d-lg-block text-secondary">Home</span>
+</Nav.Link>
+
+<Nav.Link href="https://epicode.com" target="_blank" className="d-flex flex-column align-items-center">
+  <FaUserFriends size={40} className="glow-icon" />
+  <span className="d-none d-lg-block text-secondary">Rete</span>
+</Nav.Link>
       <FaBriefcase size={40} className="text-secondary glow-icon" />
-      <FaCommentDots size={40} className="text-secondary glow-icon" />
+      <Nav.Link href="https://discord.com" target="_blank" className="d-flex flex-column align-items-center">
+  <FaCommentDots size={40} className="glow-icon" />
+  <span className="d-none d-lg-block text-secondary">Messaggistica</span>
+</Nav.Link>
       <div ref={dropdownRef} className="position-relative">
   <FaUserCircle
     size={40}
@@ -194,10 +270,20 @@ function MyNavbar() {
 <Col md={5} className="d-none d-lg-block ms-lg-5 ps-lg-5 fs-6">
 
             <Nav className="d-flex justify-content-between justify-content-lg-start align-items-center gap-lg-5 ps-2 ps-lg-2 mt-3 py-0" navbarScroll>
-              <NavItem icon={<FaHome size={30} className="glow-icon" />} label="Home" />
-              <NavItem icon={<FaUserFriends size={30} className="glow-icon" />} label="Rete" />
+            <Nav.Link as={Link} to="/" className="d-flex flex-column align-items-center">
+  <FaHome size={30} className="glow-icon" />
+  <span className="d-none d-lg-block text-secondary">Home</span>
+</Nav.Link>
+
+<Nav.Link href="https://epicode.com" target="_blank" className="d-flex flex-column align-items-center">
+  <FaUserFriends size={30} className="glow-icon" />
+  <span className="d-none d-lg-block text-secondary">Rete</span>
+</Nav.Link>
               <NavItem icon={<FaBriefcase size={30} className="glow-icon" />} label="Lavoro" />
-              <NavItem icon={<FaCommentDots size={30} className="glow-icon" />} label="Messaggistica" />
+              <Nav.Link href="https://discord.com" target="_blank" className="d-flex flex-column align-items-center">
+  <FaCommentDots size={30} className="glow-icon" />
+  <span className="d-none d-lg-block text-secondary">Messaggistica</span>
+</Nav.Link>
               <NavItem icon={<FaBell size={30} className="glow-icon" />} label="Notifiche" />
 
               {/* TU Dropdown */}
