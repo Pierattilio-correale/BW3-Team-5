@@ -1,14 +1,27 @@
-import { Button } from "react-bootstrap";
-import { Col } from "react-bootstrap";
-import ListGroup from "react-bootstrap/ListGroup";
-import "../CSS/sidebar.css";
+import { Button } from "react-bootstrap"
+import { Col } from "react-bootstrap"
+import ListGroup from "react-bootstrap/ListGroup"
+import "../CSS/sidebar.css"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import { fetchArrayAction } from "../Redux/Action"
+
+const pierattiliotoken =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NWRkM2Q0NTE4MTAwMTVjZTgzZDQiLCJpYXQiOjE3NDUzMTMyMzYsImV4cCI6MTc0NjUyMjgzNn0.1nb5bTwFZyxSFdHoFu9ITxAAdGeQ6LtV1ZolKHc4D88"
 
 function Sidebar() {
+  const dispatch = useDispatch()
+
+  const profile = useSelector((state) => state.fetch.profile)
+
+  useEffect(() => {
+    dispatch(
+      fetchArrayAction("https://striveschool-api.herokuapp.com/api/profile/me")
+    )
+  }, [dispatch])
   function truncateText(text, maxLength = 63) {
-    if (!text) return "";
-    return text.length > maxLength
-      ? text.slice(0, maxLength - 3) + "..."
-      : text;
+    if (!text) return ""
+    return text.length > maxLength ? text.slice(0, maxLength - 3) + "..." : text
   }
   return (
     <Col sm={12} lg={3}>
@@ -24,7 +37,7 @@ function Sidebar() {
             Profilo pubblico e URL <i className="bi bi-pen"></i>
           </h3>
           <p className="text-secondary">
-            www.linkedin.com/in/orso-black-627993361
+            www.linkedin.com/in/{profile.username}-{profile._id}
           </p>
         </ListGroup.Item>
       </ListGroup>
@@ -181,7 +194,7 @@ function Sidebar() {
         </ListGroup.Item>
       </ListGroup>
     </Col>
-  );
+  )
 }
 
-export default Sidebar;
+export default Sidebar
