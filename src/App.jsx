@@ -13,21 +13,25 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <MyNavbar />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Experience />
-                <Sidebar />
-              </>
-            }
-          />
-          <Route path="experience/:expID" element={<ExperienceDelite />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
+        <div className="d-flex flex-column min-vh-100">
+          <MyNavbar />
+          <main className="flex-grow-1 container mt-4">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <Experience />
+                    <Sidebar />
+                  </>
+                }
+              />
+              <Route path="experience/:expID" element={<ExperienceDelite />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
       </BrowserRouter>
     </>
   )
