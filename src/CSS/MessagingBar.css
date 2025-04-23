@@ -1,8 +1,8 @@
 .messaging-bar {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 350px; /* Aumentato per dare più spazio */
+  bottom: 0px;
+  right: 10px;
+  width: 350px;
   font-family: Arial, sans-serif;
   z-index: 1000;
   border: 0.5px solid rgb(197, 197, 197);

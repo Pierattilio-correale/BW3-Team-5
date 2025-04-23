@@ -21,8 +21,8 @@ const Messaggistica = () => {
   }
 
   return (
-    <div className="messaging-bar">
-      <div className="messaging-header">
+    <div className="messaging-bar rounded-2">
+      <div className="messaging-header d-flex align-items-center justify-content-between gap-2 p-2 rounded-2">
         <div className="profile-circle">
           <Image
             src="https://www.firenzetoday.it/~media/horizontal-hi/27451125288350/schermata-2020-10-06-alle-18-05-04-2.jpg"
@@ -37,14 +37,19 @@ const Messaggistica = () => {
           onClick={() => setOpen(!open)}
           aria-controls="messaging-body"
           aria-expanded={open}
-          className="w-100 primoB d-flex justify-content-between"
+          className="primoB d-flex align-items-center"
         >
-          Messaggistica
+          <span className="me-2">Messaggistica</span>
           <i className={`fa ${open ? "fa-chevron-down" : "fa-chevron-up"}`} />
         </Button>
 
         <Dropdown align="end">
-          <Dropdown.Toggle variant="link" id="dropdown-basic">
+          <Dropdown.Toggle
+            as="span"
+            id="dropdown-basic"
+            className="p-0"
+            style={{ cursor: "pointer" }}
+          >
             <i className="fa fa-ellipsis-h" />
           </Dropdown.Toggle>
 
@@ -62,52 +67,42 @@ const Messaggistica = () => {
           </Dropdown.Menu>
         </Dropdown>
 
-        <>
-          <Button
-            variant="link"
-            onClick={() => setShowProfiles(true)}
-            className="p-0"
-          >
-            <i className="fa fa-edit" />
-          </Button>
-
-          <Modal
-            show={showProfiles}
-            onHide={() => setShowProfiles(false)}
-            centered
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>Profili</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {["Gigio", "Topo", "Topo Gigio", "Gigio Topo"].map(
-                (name, index) => (
-                  <div
-                    key={index}
-                    className="profile-info d-flex align-items-center mb-3"
-                  >
-                    <Image
-                      src="https://www.firenzetoday.it/~media/horizontal-hi/27451125288350/schermata-2020-10-06-alle-18-05-04-2.jpg"
-                      alt={name}
-                      roundedCircle
-                      className="profile-info-image me-2"
-                    />
-                    <span className="profile-name">{name}</span>
-                  </div>
-                )
-              )}
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                variant="secondary"
-                onClick={() => setShowProfiles(false)}
-              >
-                Chiudi
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </>
+        {/* Icona penna */}
+        <Button
+          variant="link"
+          onClick={() => setShowProfiles(true)}
+          className="p-0"
+        >
+          <i className="fa fa-edit" />
+        </Button>
       </div>
+
+      <Modal show={showProfiles} onHide={() => setShowProfiles(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Profili</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {["Gigio", "Topo", "Topo Gigio", "Gigio Topo"].map((name, index) => (
+            <div
+              key={index}
+              className="profile-info d-flex align-items-center mb-3"
+            >
+              <Image
+                src="https://www.firenzetoday.it/~media/horizontal-hi/27451125288350/schermata-2020-10-06-alle-18-05-04-2.jpg"
+                alt={name}
+                roundedCircle
+                className="profile-info-image me-2"
+              />
+              <span className="profile-name">{name}</span>
+            </div>
+          ))}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowProfiles(false)}>
+            Chiudi
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
       <Collapse in={open}>
         <div id="messaging-body">
