@@ -124,7 +124,22 @@ const ExperienceDelite = function () {
             className="d-flex justify-content-between"
           >
             <div>
-              <h5>{exp.role}</h5>
+              <div className="d-flex ">
+                {exp.image && (
+                  <div className="mb-2">
+                    <img
+                      src={exp.image}
+                      alt="Esperienza"
+                      style={{
+                        width: "100%",
+                        maxWidth: "50px",
+                        borderRadius: "40px",
+                      }}
+                    />
+                  </div>
+                )}
+                <h5 className="mx-2">{exp.role}</h5>
+              </div>
               <p>
                 {exp.company} - {exp.area}
               </p>

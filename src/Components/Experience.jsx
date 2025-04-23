@@ -82,6 +82,7 @@ const Experience = function () {
       console.error(err);
     }
   };
+
   return (
     <>
       <Col sm={9} className="">
@@ -217,13 +218,86 @@ const Experience = function () {
 
           {experienceArray?.map((exp) => (
             <ListGroupItem key={exp._id}>
-              <h5>{exp.role}</h5>
+              <div className="d-flex ">
+                {exp.image && (
+                  <div className="mb-2">
+                    <img
+                      src={exp.image}
+                      alt="Esperienza"
+                      style={{
+                        width: "100%",
+                        maxWidth: "50px",
+                        borderRadius: "40px",
+                      }}
+                    />
+                  </div>
+                )}
+                <h5 className="mx-2">{exp.role}</h5>
+              </div>
               <p>
                 {exp.company} - {exp.area}
               </p>
               <p>{exp.description}</p>
-              <p>data d'inizio {exp.startDate}</p>
-              <p>data fine : {exp.endDate || "In corso"}</p>
+              <p>Data d'inizio: {exp.startDate}</p>
+              <p>Data fine: {exp.endDate || "In corso"}</p>
+
+              <Form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const fileInput = e.target.elements[`expImage-${exp._id}`];
+                  const file = fileInput.files[0];
+                  if (!file) {
+                    alert("Seleziona un file!");
+                    return;
+                  }
+
+                  const formData = new FormData();
+                  formData.append("experience", file);
+
+                  fetch(
+                    `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences/${exp._id}/picture`,
+                    {
+                      method: "POST",
+                      headers: {
+                        Authorization: `Bearer ${pierattiliotoken}`,
+                      },
+                      body: formData,
+                    }
+                  )
+                    .then((response) => {
+                      if (response.ok) {
+                        alert("Immagine caricata con successo!");
+
+                        dispatch(
+                          fetchArrayExperience(
+                            `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`
+                          )
+                        );
+                      } else {
+                        throw new Error(
+                          "Errore durante l'upload dell'immagine."
+                        );
+                      }
+                    })
+                    .catch((error) => {
+                      console.error("Errore:", error);
+                    });
+                }}
+              >
+                <Form.Group
+                  controlId={`expImage-${exp._id}`}
+                  className="mb-2 mt-3"
+                >
+                  <Form.Label>Carica immagine per questa esperienza</Form.Label>
+                  <Form.Control type="file" accept="image/*" />
+                </Form.Group>
+                <button
+                  type="submit"
+                  className="btn btn-outline-primary btn-sm"
+                >
+                  Upload
+                </button>
+              </Form>
             </ListGroupItem>
           ))}
         </ListGroup>
