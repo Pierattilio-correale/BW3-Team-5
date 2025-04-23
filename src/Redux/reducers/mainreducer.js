@@ -1,16 +1,15 @@
 import {
-  FETCH_ARRAY_ACTION,
+  FETCH_ARRAY_EXPERIENCE,
   FETCH_ARRAY_IS_ERROR,
   FETCH_ARRAY_IS_LOADING,
 } from "../Action";
 
 const initialState = {
-  profile: {},
+  experiences: [],
   isLoading: false,
   isError: false,
 };
-
-const fetchArrayReducer = (state = initialState, action) => {
+const mainReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_ARRAY_IS_LOADING:
       return {
@@ -19,10 +18,10 @@ const fetchArrayReducer = (state = initialState, action) => {
         isError: false,
       };
 
-    case FETCH_ARRAY_ACTION:
+    case FETCH_ARRAY_EXPERIENCE:
       return {
         ...state,
-        profile: action.payload,
+        experiences: action.payload,
         isLoading: false,
         isError: false,
       };
@@ -38,4 +37,5 @@ const fetchArrayReducer = (state = initialState, action) => {
       return state;
   }
 };
-export default fetchArrayReducer;
+
+export default mainReducer;
