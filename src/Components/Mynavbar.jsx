@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import ScrollActionBar from "./Scrollbar";
 import {
   Navbar,
   Container,

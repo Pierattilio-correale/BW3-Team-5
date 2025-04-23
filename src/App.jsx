@@ -9,6 +9,7 @@ import NotFound from "./Components/NotFound"
 import ExperienceDelite from "./Components/ExperienceDelite"
 import Footer from "./Components/Footer"
 import CompanySearchResults from "./Components/result"
+import ScrollActionBar from "./Components/Scrollbar"
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
     <>
       <BrowserRouter>
         <MyNavbar />
+        <ScrollActionBar />
         <Routes>
           <Route
             path="/"
