@@ -10,12 +10,15 @@ import ExperienceDelite from "./Components/ExperienceDelite";
 import Footer from "./Components/Footer";
 import { Container, Row, Col } from "react-bootstrap";
 import ProfileSection from "./Components/ProfileSection";
+import CompanySearchResults from "./Components/result";
+import ScrollActionBar from "./Components/Scrollbar";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <MyNavbar />
+        <ScrollActionBar />
         <Routes>
           <Route
             path="/"
@@ -36,6 +39,8 @@ function App() {
             }
           />
           <Route path="experience/:expID" element={<ExperienceDelite />} />
+          <Route path="/results" element={<CompanySearchResults />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
