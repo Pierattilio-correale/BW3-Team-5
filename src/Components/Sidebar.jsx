@@ -1,23 +1,11 @@
-import { Button } from "react-bootstrap"
-import { Col } from "react-bootstrap"
-import ListGroup from "react-bootstrap/ListGroup"
+import { Button, Col, ListGroup } from "react-bootstrap"
 import "../CSS/sidebar.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { fetchArrayAction } from "../Redux/Action"
 
-const pierattiliotoken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NWRkM2Q0NTE4MTAwMTVjZTgzZDQiLCJpYXQiOjE3NDUzMTMyMzYsImV4cCI6MTc0NjUyMjgzNn0.1nb5bTwFZyxSFdHoFu9ITxAAdGeQ6LtV1ZolKHc4D88"
-
-const andreatoken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NDU3OWQ0NTE4MTAwMTVjZTgzY2QiLCJpYXQiOjE3NDUzMDcwNTUsImV4cCI6MTc0NjUxNjY1NX0.T2ztF0EcceV08HgbelOhBcrDNgP_xOKHw2GrBZn-vVc"
-
-const lucatoken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NjE1MmQ0NTE4MTAwMTVjZTgzZDUiLCJpYXQiOjE3NDUzMTQxMzIsImV4cCI6MTc0NjUyMzczMn0.8K9oLOgDMxF4Td7298MAX4gg-vyxzWpxpFXXH4Q2MvM"
-
 function Sidebar() {
   const dispatch = useDispatch()
-
   const profile = useSelector((state) => state.fetch.profile)
 
   useEffect(() => {
@@ -25,10 +13,12 @@ function Sidebar() {
       fetchArrayAction("https://striveschool-api.herokuapp.com/api/profile/me")
     )
   }, [dispatch])
+
   function truncateText(text, maxLength = 63) {
     if (!text) return ""
     return text.length > maxLength ? text.slice(0, maxLength - 3) + "..." : text
   }
+
   return (
     <Col sm={12} lg={3}>
       <ListGroup className="mb-3 ms-3">
@@ -43,10 +33,11 @@ function Sidebar() {
             Profilo pubblico e URL <i className="bi bi-pen"></i>
           </h3>
           <p className="text-secondary">
-            www.linkedin.com/in/{profile.username}-{profile._id}
+            www.linkedin.com/in/{profile?.username}-{profile?._id}
           </p>
         </ListGroup.Item>
       </ListGroup>
+
       <ListGroup className="ms-3">
         <ListGroup.Item>
           <h6>Persone che potresti conoscere</h6>
@@ -57,137 +48,20 @@ function Sidebar() {
             <img
               className="rounded-circle me-3"
               style={{ width: "48px", height: "48px", objectFit: "cover" }}
-              src="http://placecats.com/100/100"
+              src={profile?.image || "http://placehold.it/48x48"}
               alt="Profile"
             />
             <div>
-              <h6 className="mb-0 name-hover">Luca Ferrara</h6>
+              <h6 className="mb-0 name-hover">
+                {profile?.name} {profile?.surname}
+              </h6>
               <p className="mb-1 small text-secondary">
-                {truncateText(
-                  "security+ | BTL1 | EJPT | SOC | Analyst 1 livello @ istituto gsdkjghfskl"
-                )}
+                {truncateText(profile?.title)}
               </p>
-              <Button
-                className="rounded-pill"
-                variant="outline-secondary"
-                size="sm"
-              >
-                <i className="bi bi-person-fill-add"></i> Collegati
-              </Button>
-            </div>
-          </div>
-        </ListGroup.Item>
-        <ListGroup.Item>
-          <div className="d-flex align-items-start">
-            <img
-              className="rounded-circle me-3"
-              style={{ width: "48px", height: "48px", objectFit: "cover" }}
-              src="http://placecats.com/400/400"
-              alt="Profile"
-            />
-            <div>
-              <h6 className="mb-0 name-hover">Pieratilio Correale</h6>
               <p className="mb-1 small text-secondary">
-                {truncateText("Ethical Hacker @Wallife")}
+                {truncateText(profile?.bio)}
               </p>
-              <Button
-                className="rounded-pill"
-                variant="outline-secondary"
-                size="sm"
-              >
-                <i className="bi bi-person-fill-add"></i> Collegati
-              </Button>
-            </div>
-          </div>
-        </ListGroup.Item>
-        <ListGroup.Item>
-          <div className="d-flex align-items-start">
-            <img
-              className="rounded-circle me-3"
-              style={{ width: "48px", height: "48px", objectFit: "cover" }}
-              src="http://placecats.com/200/200"
-              alt="Profile"
-            />
-            <div>
-              <h6 className="mb-0 name-hover">Stella</h6>
-              <p className="mb-1 small text-secondary">
-                {truncateText(
-                  "🧩 Data Entry 🧩 Junior Data Analyst 🧩 assistente virtuale"
-                )}
-              </p>
-              <Button
-                className="rounded-pill"
-                variant="outline-secondary"
-                size="sm"
-              >
-                <i className="bi bi-person-fill-add"></i> Collegati
-              </Button>
-            </div>
-          </div>
-        </ListGroup.Item>
-        <ListGroup.Item>
-          <div className="d-flex align-items-start">
-            <img
-              className="rounded-circle me-3"
-              style={{ width: "48px", height: "48px", objectFit: "cover" }}
-              src="http://placecats.com/600/400"
-              alt="Profile"
-            />
-            <div>
-              <h6 className="mb-0 name-hover">Andrea Nika</h6>
-              <p className="mb-1 small text-secondary">
-                {truncateText("Just a programmer trying to make end's meet")}
-              </p>
-              <Button
-                className="rounded-pill"
-                variant="outline-secondary"
-                size="sm"
-              >
-                <i className="bi bi-person-fill-add"></i> Collegati
-              </Button>
-            </div>
-          </div>
-        </ListGroup.Item>
-        <ListGroup.Item>
-          <div className="d-flex align-items-start">
-            <img
-              className="rounded-circle me-3"
-              style={{ width: "48px", height: "48px", objectFit: "cover" }}
-              src="http://placecats.com/800/900"
-              alt="Profile"
-            />
-            <div>
-              <h6 className="mb-0 name-hover">Felice Liparuli</h6>
-              <p className="mb-1 small text-secondary">
-                {truncateText(
-                  "security+ | BTL1 | EJPT | SOC | Analyst 1 livello @ istituto..."
-                )}
-              </p>
-              <Button
-                className="rounded-pill"
-                variant="outline-secondary"
-                size="sm"
-              >
-                <i className="bi bi-person-fill-add"></i> Collegati
-              </Button>
-            </div>
-          </div>
-        </ListGroup.Item>
-        <ListGroup.Item>
-          <div className="d-flex align-items-start">
-            <img
-              className="rounded-circle me-3"
-              style={{ width: "48px", height: "48px", objectFit: "cover" }}
-              src="http://placecats.com/600/600"
-              alt="Profile"
-            />
-            <div>
-              <h6 className="mb-0 name-hover">Noa</h6>
-              <p className="mb-1 small text-secondary">
-                {truncateText(
-                  "security+ | BTL1 | EJPT | SOC | Analyst 1 livello @ istituto..."
-                )}
-              </p>
+              <p className="mb-1 small text-secondary">📍 {profile?.area}</p>
               <Button
                 className="rounded-pill"
                 variant="outline-secondary"
