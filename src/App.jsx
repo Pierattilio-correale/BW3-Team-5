@@ -8,6 +8,8 @@ import MyNavbar from "./Components/Mynavbar"
 import NotFound from "./Components/NotFound"
 import ExperienceDelite from "./Components/ExperienceDelite"
 import Footer from "./Components/Footer"
+import Messaggistica from "./Components/Messaggistica"
+import "@fortawesome/fontawesome-free/css/all.min.css"
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
               <Route path="experience/:expID" element={<ExperienceDelite />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <Messaggistica />
           </main>
           <Footer />
         </div>
