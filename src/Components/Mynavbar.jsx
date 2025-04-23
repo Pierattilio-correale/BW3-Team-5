@@ -164,9 +164,15 @@ function MyNavbar() {
   <span className="d-none d-lg-block text-secondary">Home</span>
 </Nav.Link>
 
-      <FaUserFriends size={40} className="text-secondary glow-icon" />
+<Nav.Link href="https://epicode.com" target="_blank" className="d-flex flex-column align-items-center">
+  <FaUserFriends size={40} className="glow-icon" />
+  <span className="d-none d-lg-block text-secondary">Rete</span>
+</Nav.Link>
       <FaBriefcase size={40} className="text-secondary glow-icon" />
-      <FaCommentDots size={40} className="text-secondary glow-icon" />
+      <Nav.Link href="https://discord.com" target="_blank" className="d-flex flex-column align-items-center">
+  <FaCommentDots size={40} className="glow-icon" />
+  <span className="d-none d-lg-block text-secondary">Messaggistica</span>
+</Nav.Link>
       <div ref={dropdownRef} className="position-relative">
   <FaUserCircle
     size={40}
@@ -268,9 +274,15 @@ function MyNavbar() {
   <span className="d-none d-lg-block text-secondary">Home</span>
 </Nav.Link>
 
-              <NavItem icon={<FaUserFriends size={30} className="glow-icon" />} label="Rete" />
+<Nav.Link href="https://epicode.com" target="_blank" className="d-flex flex-column align-items-center">
+  <FaUserFriends size={30} className="glow-icon" />
+  <span className="d-none d-lg-block text-secondary">Rete</span>
+</Nav.Link>
               <NavItem icon={<FaBriefcase size={30} className="glow-icon" />} label="Lavoro" />
-              <NavItem icon={<FaCommentDots size={30} className="glow-icon" />} label="Messaggistica" />
+              <Nav.Link href="https://discord.com" target="_blank" className="d-flex flex-column align-items-center">
+  <FaCommentDots size={30} className="glow-icon" />
+  <span className="d-none d-lg-block text-secondary">Messaggistica</span>
+</Nav.Link>
               <NavItem icon={<FaBell size={30} className="glow-icon" />} label="Notifiche" />
 
               {/* TU Dropdown */}
