@@ -6,7 +6,7 @@ import Experience from "./Components/Experience";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MyNavbar from "./Components/Mynavbar";
 import NotFound from "./Components/NotFound";
-
+import ExperienceDelite from "./Components/ExperienceDelite";
 
 
 function App() {
