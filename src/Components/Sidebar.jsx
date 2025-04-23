@@ -10,7 +10,15 @@ function Sidebar() {
 
   useEffect(() => {
     dispatch(
-      fetchArrayAction("https://striveschool-api.herokuapp.com/api/profile/me")
+      fetchArrayAction(
+        "https://striveschool-api.herokuapp.com/api/profile/68074579d451810015ce83cd"
+      ),
+      fetchArrayAction(
+        "https://striveschool-api.herokuapp.com/api/profile/68075dd3d451810015ce83d4"
+      ),
+      fetchArrayAction(
+        "https://striveschool-api.herokuapp.com/api/profile/68076152d451810015ce83d5"
+      )
     )
   }, [dispatch])
 
@@ -42,6 +50,64 @@ function Sidebar() {
         <ListGroup.Item>
           <h6>Persone che potresti conoscere</h6>
           <p className="text-secondary">Dalla tua scuola o università</p>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <div className="d-flex align-items-start">
+            <img
+              className="rounded-circle me-3"
+              style={{ width: "48px", height: "48px", objectFit: "cover" }}
+              src={profile?.image || "http://placehold.it/48x48"}
+              alt="Profile"
+            />
+            <div>
+              <h6 className="mb-0 name-hover">
+                {profile?.name} {profile?.surname}
+              </h6>
+              <p className="mb-1 small text-secondary">
+                {truncateText(profile?.title)}
+              </p>
+              <p className="mb-1 small text-secondary">
+                {truncateText(profile?.bio)}
+              </p>
+              <p className="mb-1 small text-secondary">📍 {profile?.area}</p>
+              <Button
+                className="rounded-pill"
+                variant="outline-secondary"
+                size="sm"
+              >
+                <i className="bi bi-person-fill-add"></i> Collegati
+              </Button>
+            </div>
+          </div>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <div className="d-flex align-items-start">
+            <img
+              className="rounded-circle me-3"
+              style={{ width: "48px", height: "48px", objectFit: "cover" }}
+              src={profile?.image || "http://placehold.it/48x48"}
+              alt="Profile"
+            />
+            <div>
+              <h6 className="mb-0 name-hover">
+                {profile?.name} {profile?.surname}
+              </h6>
+              <p className="mb-1 small text-secondary">
+                {truncateText(profile?.title)}
+              </p>
+              <p className="mb-1 small text-secondary">
+                {truncateText(profile?.bio)}
+              </p>
+              <p className="mb-1 small text-secondary">📍 {profile?.area}</p>
+              <Button
+                className="rounded-pill"
+                variant="outline-secondary"
+                size="sm"
+              >
+                <i className="bi bi-person-fill-add"></i> Collegati
+              </Button>
+            </div>
+          </div>
         </ListGroup.Item>
         <ListGroup.Item>
           <div className="d-flex align-items-start">
