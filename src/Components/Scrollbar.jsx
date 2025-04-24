@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
+import { Button, Col, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const ScrollActionBar = () => {
+  const navigate = useNavigate();
   const [showBar, setShowBar] = useState(false);
   const profile = useSelector((state) => state.fetch.profile);
 
@@ -10,8 +12,8 @@ const ScrollActionBar = () => {
     const handleScroll = () => {
       setShowBar(window.scrollY > 250);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   if (!showBar || !profile) return null;
@@ -22,19 +24,28 @@ const ScrollActionBar = () => {
         <img
           src={profile.image}
           alt="User"
-          className="rounded-circle me-2"
+          className="rounded-circle me-2 hoverp"
           width={50}
           height={50}
+          onClick={() => {
+            navigate("/");
+          }}
         />
         <div>
-          <div className="fw-bold">{profile.name} {profile.surname}</div>
+          <div className="fw-bold">
+            {profile.name} {profile.surname}
+          </div>
           <div className="text-muted small">{profile.title}</div>
         </div>
       </Col>
 
       <Col md={7} className="d-flex justify-content-end gap-4 fs-4 me-3 pe-3">
-        <Button variant="outline-primary" size="lg">Altro</Button>
-        <Button variant="outline-primary" size="lg">Messaggio</Button>
+        <Button variant="outline-primary" size="lg">
+          Altro
+        </Button>
+        <Button variant="outline-primary" size="lg">
+          Messaggio
+        </Button>
         <Button variant="primary" size="lg">
           <i className="bi bi-person-plus-fill me-1"></i>Collegati
         </Button>

@@ -17,6 +17,9 @@ export const fetchArrayAction = (endpoint, pierattiliotoken) => {
     // const pierattiliotoken =
     //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NWRkM2Q0NTE4MTAwMTVjZTgzZDQiLCJpYXQiOjE3NDUzMTMyMzYsImV4cCI6MTc0NjUyMjgzNn0.1nb5bTwFZyxSFdHoFu9ITxAAdGeQ6LtV1ZolKHc4D88";
 
+    //felice token
+    //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3OTVkMmQ0NTE4MTAwMTVjZTgzZWUiLCJpYXQiOjE3NDU0MDUyNDUsImV4cCI6MTc0NjYxNDg0NX0.GJvwjAhVtzbLVUz8nJ5IFt-ymk6kLeussOAZk9WV9VQ
+
     const andreatoken =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NDU3OWQ0NTE4MTAwMTVjZTgzY2QiLCJpYXQiOjE3NDUzMDcwNTUsImV4cCI6MTc0NjUxNjY1NX0.T2ztF0EcceV08HgbelOhBcrDNgP_xOKHw2GrBZn-vVc";
 

@@ -2,8 +2,10 @@ import { Button, Col, ListGroup } from "react-bootstrap";
 import "../CSS/sidebar.css";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function Sidebar() {
+  const navigate = useNavigate();
   const profile = useSelector((state) => state.fetch.profile);
   const [data, setData] = useState(null);
   const [data2, setData2] = useState(null);
@@ -12,7 +14,7 @@ function Sidebar() {
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NDU3OWQ0NTE4MTAwMTVjZTgzY2QiLCJpYXQiOjE3NDUzMDcwNTUsImV4cCI6MTc0NjUxNjY1NX0.T2ztF0EcceV08HgbelOhBcrDNgP_xOKHw2GrBZn-vVc";
   const getProfile1 = () => {
     fetch(
-      "https://striveschool-api.herokuapp.com/api/profile/68074579d451810015ce83cd",
+      "https://striveschool-api.herokuapp.com/api/profile/680795d2d451810015ce83ee",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -129,11 +131,16 @@ function Sidebar() {
             <img
               className="rounded-circle me-3"
               style={{ width: "48px", height: "48px", objectFit: "cover" }}
-              src={profile?.image || "http://placehold.it/48x48"}
+              src={data?.image || "http://placehold.it/48x48"}
               alt="Profile"
             />
             <div>
-              <h6 className="mb-0 name-hover">
+              <h6
+                className="mb-0 name-hover"
+                onClick={() => {
+                  navigate("/details/" + data?._id);
+                }}
+              >
                 {data?.name} {data?.surname}
               </h6>
               <p className="mb-1 small text-secondary">
@@ -162,7 +169,12 @@ function Sidebar() {
               alt="Profile"
             />
             <div>
-              <h6 className="mb-0 name-hover">
+              <h6
+                className="mb-0 name-hover"
+                onClick={() => {
+                  navigate("/details/" + data2?._id);
+                }}
+              >
                 {data2?.name} {data2?.surname}
               </h6>
               <p className="mb-1 small text-secondary">
@@ -192,7 +204,12 @@ function Sidebar() {
               alt="Profile"
             />
             <div>
-              <h6 className="mb-0 name-hover">
+              <h6
+                className="mb-0 name-hover "
+                onClick={() => {
+                  navigate("/details/" + data3?._id);
+                }}
+              >
                 {data3?.name} {data3?.surname}
               </h6>
               <p className="mb-1 small text-secondary">
