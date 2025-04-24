@@ -13,7 +13,7 @@ import {
   FaSearch,
 } from "react-icons/fa";
 import { IoMdGrid } from "react-icons/io";
-import "./navbar.css";
+
 import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
@@ -315,10 +315,14 @@ function MyNavbar() {
                 <FaUserFriends size={30} className="glow-icon" />
                 <span className="d-none d-lg-block text-secondary">Rete</span>
               </Nav.Link>
-            <Nav.Link as={Link} to="/dev" className="d-flex flex-column align-items-center">
-  <FaBriefcase size={30} className="glow-icon" />
-  <span className="d-none d-lg-block text-secondary">Lavoro</span>
-</Nav.Link>
+              <Nav.Link
+                as={Link}
+                to="/dev"
+                className="d-flex flex-column align-items-center"
+              >
+                <FaBriefcase size={30} className="glow-icon" />
+                <span className="d-none d-lg-block text-secondary">Lavoro</span>
+              </Nav.Link>
 
               <Nav.Link
                 href="https://discord.com"
