@@ -58,7 +58,7 @@ const ProfileSection = () => {
   };
 
   return (
-    <div className="bg-white shadow-sm mb-4 rounded w-responsive">
+    <div className="bg-white shadow-sm mb-4  rounded w-responsive">
       {/* Cover */}
       <div style={{ height: "200px", overflow: "hidden" }}>
         <img
