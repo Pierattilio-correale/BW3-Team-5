@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGear } from "@fortawesome/free-solid-svg-icons"
 import "../CSS/footer.css"
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons"
+import { faShield } from "@fortawesome/free-solid-svg-icons"
 
 const Footer = function () {
   const [selectedLanguage, setSelectedLanguage] = useState(
@@ -138,7 +140,10 @@ const Footer = function () {
             <ul className="list-unstyled">
               <li className="mb-2">
                 <a href="#link14" className="text-muted text-decoration-none">
-                  <i className="fa fa-question text-secondary me-2"></i>
+                  <FontAwesomeIcon
+                    icon={faQuestionCircle}
+                    className="text-secondary me-2"
+                  />
                   Domande?
                 </a>
                 <p> Visita il nostro Centro assistenza.</p>
@@ -152,7 +157,10 @@ const Footer = function () {
               </li>
               <li>
                 <a href="#link16" className="text-muted text-decoration-none">
-                  <i className="fa fa-shield text-secondary me-2"></i>
+                  <FontAwesomeIcon
+                    icon={faShield}
+                    className="text-secondary me-2"
+                  />
                   Trasparenza sui contenuti consigliati
                 </a>
                 <p> Scopri di più sui contenuti consigliati.</p>
