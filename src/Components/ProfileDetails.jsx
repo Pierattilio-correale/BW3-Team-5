@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 function ProfileDetails() {
   const profile = useSelector((state) => state.fetch.profile);
   return (
-    <div className="mx-3 shadow-sm rounded w-responsive">
+    <div className="mx-3  rounded w-responsive">
       {/* Attività */}
-      <ListGroup className="mb-3">
+      <ListGroup className="mb-3 shadow-sm">
         <ListGroup.Item>
           <h6 className="fw-bold mb-1">Attività</h6>
           <p className="text-secondary mb-1">0 follower</p>
@@ -20,7 +20,7 @@ function ProfileDetails() {
       </ListGroup>
 
       {/* Formazione */}
-      <ListGroup className="mb-3">
+      <ListGroup className="mb-3 shadow-sm">
         <ListGroup.Item>
           <h6 className="fw-bold mb-2">Formazione</h6>
           <div className="d-flex align-items-center">
@@ -38,7 +38,7 @@ function ProfileDetails() {
       </ListGroup>
 
       {/* Interessi */}
-      <ListGroup className="d-flex">
+      <ListGroup className="d-flex shadow-sm">
         <ListGroup.Item>
           <h6 className="fw-bold mb-2">Interessi</h6>
           <div className="d-flex mb-2">
