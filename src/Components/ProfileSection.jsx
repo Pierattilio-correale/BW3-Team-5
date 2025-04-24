@@ -1,21 +1,67 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Button, Spinner, Form } from "react-bootstrap";
+import { fetchArrayAction } from "../Redux/Action";
 
 const ProfileSection = () => {
+  const dispatch = useDispatch();
   const profile = useSelector((state) => state.fetch.profile);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+
+  const pierattiliotoken =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NDU3OWQ0NTE4MTAwMTVjZTgzY2QiLCJpYXQiOjE3NDUzMDcwNTUsImV4cCI6MTc0NjUxNjY1NX0.T2ztF0EcceV08HgbelOhBcrDNgP_xOKHw2GrBZn-vVc";
+
+  if (!profile) return null;
+
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const handleImageUpload = async () => {
+    if (!selectedFile) return;
+
+    setUploading(true);
+    const formData = new FormData();
+    formData.append("profile", selectedFile);
+
+    try {
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/picture`,
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization: `Bearer ${pierattiliotoken}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        alert("Immagine del profilo aggiornata con successo!");
+        dispatch(
+          fetchArrayAction(
+            "https://striveschool-api.herokuapp.com/api/profile/me",
+            pierattiliotoken
+          )
+        );
+      } else {
+        throw new Error("Errore durante il caricamento dell'immagine.");
+      }
+    } catch (error) {
+      console.error("Upload error:", error);
+    } finally {
+      setUploading(false);
+      setSelectedFile(null);
+    }
+  };
 
   return (
-    <div className="bg-white shadow-sm mb-4 rounded ">
+    <div className="bg-white shadow-sm mb-4 rounded">
       {/* Cover */}
-      <div
-        style={{
-          height: "200px",
-          overflow: "hidden",
-        }}
-      >
+      <div style={{ height: "200px", overflow: "hidden" }}>
         <img
-          src="https://placedog.net/1000/1000"
+          src={profile.image}
           alt="cover"
           className="w-100 h-100 object-fit-cover opacity-50"
           style={{ objectFit: "cover" }}
@@ -52,7 +98,30 @@ const ProfileSection = () => {
           </div>
         </div>
 
-        {/* Bottoni */}
+        {/* Upload immagine profilo */}
+        <div className="mt-3">
+          <Form.Group controlId="formFile" className="mb-2">
+            <Form.Label>Carica una nuova immagine profilo</Form.Label>
+            <Form.Control type="file" onChange={handleFileChange} />
+          </Form.Group>
+          <Button
+            variant="outline-primary"
+            onClick={handleImageUpload}
+            disabled={!selectedFile || uploading}
+            className="rounded-pill"
+          >
+            {uploading ? (
+              <>
+                <Spinner animation="border" size="sm" className="me-2" />
+                Caricamento...
+              </>
+            ) : (
+              "Carica immagine"
+            )}
+          </Button>
+        </div>
+
+        {/* Bottoni profilo */}
         <div className="d-flex flex-wrap gap-2 mt-3">
           <Button variant="primary" className="rounded-pill">
             Disponibile per
@@ -68,10 +137,10 @@ const ProfileSection = () => {
           </Button>
         </div>
 
-        {/* Box disponibili a lavorare  ecc*/}
-        <div className="d-flex mt-4 flex-wrap gap-3 ">
+        {/* Box info */}
+        <div className="d-flex mt-4 flex-wrap gap-3">
           <div
-            className="bg-light border p-3 rounded "
+            className="bg-light border p-3 rounded"
             style={{ minWidth: "350px", maxWidth: "500px" }}
           >
             <strong>Disponibile a lavorare</strong>
@@ -82,7 +151,7 @@ const ProfileSection = () => {
           </div>
 
           <div
-            className="bg-light border p-3 rounded  "
+            className="bg-light border p-3 rounded"
             style={{ minWidth: "300px", maxWidth: "500px" }}
           >
             <p className="mb-1 small">

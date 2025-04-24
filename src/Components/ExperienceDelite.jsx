@@ -136,10 +136,11 @@ const ExperienceDelite = function () {
                     <img
                       src={exp.image}
                       alt="Esperienza"
+                      className="rounded-circle me-3"
                       style={{
-                        width: "100%",
-                        maxWidth: "50px",
-                        borderRadius: "40px",
+                        width: "48px",
+                        height: "48px",
+                        objectFit: "cover",
                       }}
                     />
                   </div>

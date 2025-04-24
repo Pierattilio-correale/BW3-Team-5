@@ -229,10 +229,11 @@ const Experience = function () {
                     <img
                       src={exp.image}
                       alt="Esperienza"
+                      className="rounded-circle me-3"
                       style={{
-                        width: "100%",
-                        maxWidth: "50px",
-                        borderRadius: "40px",
+                        width: "48px",
+                        height: "48px",
+                        objectFit: "cover",
                       }}
                     />
                   </div>
@@ -283,7 +284,7 @@ const Experience = function () {
                         dispatch(
                           fetchArrayExperience(
                             `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`,
-                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NWRkM2Q0NTE4MTAwMTVjZTgzZDQiLCJpYXQiOjE3NDUzMTMyMzYsImV4cCI6MTc0NjUyMjgzNn0.1nb5bTwFZyxSFdHoFu9ITxAAdGeQ6LtV1ZolKHc4D88"
+                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NDU3OWQ0NTE4MTAwMTVjZTgzY2QiLCJpYXQiOjE3NDUzMDcwNTUsImV4cCI6MTc0NjUxNjY1NX0.T2ztF0EcceV08HgbelOhBcrDNgP_xOKHw2GrBZn-vVc"
                           )
                         );
                       } else {
