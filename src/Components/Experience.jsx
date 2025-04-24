@@ -87,6 +87,7 @@ const Experience = function () {
       console.error(err);
     }
   };
+
   return (
     <ListGroup className="mb-3 shadow-sm rounded w-75">
       <ListGroup.Item>
@@ -215,152 +216,91 @@ const Experience = function () {
         <Alert variant="danger">Errore nel recupero della lista</Alert>
       )}
 
-                  <Form.Group className="mb-3">
-                    <Form.Label>Località</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="es.Milano"
-                      value={formData.area}
-                      onChange={(e) =>
-                        setFormData({ ...formData, area: e.target.value })
-                      }
-                    />
-                  </Form.Group>
-
-                  <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlTextarea1"
-                  >
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control
-                      as="textarea"
-                      rows={3}
-                      value={formData.description}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          description: e.target.value,
-                        })
-                      }
-                    />
-                  </Form.Group>
-                </Form>
-              </Modal.Body>
-              <Modal.Footer>
-                <a
-                  className="btn btn-primary rounded-5 pt-1 px-3"
-                  onClick={FormPUT}
-                >
-                  Save
-                </a>
-              </Modal.Footer>
-            </Modal>
-          </ListGroup.Item>
-          {isLoading && (
-            <div className="d-flex justify-content-center">
-              <Spinner variant="primary" animation="border"></Spinner>
-            </div>
-          )}
-          {isError && (
-            <Alert variant="danger">Errore nel recupero della lista</Alert>
-          )}
-
-          {experienceArray?.map((exp) => (
-            <ListGroupItem key={exp._id}>
-              <div className="d-flex ">
-                {exp.image && (
-                  <div className="mb-2">
-                    <img
-                      src={exp.image}
-                      alt="Esperienza"
-                      className="rounded-circle me-3"
-                      style={{
-                        width: "48px",
-                        height: "48px",
-                        objectFit: "cover",
-                      }}
-                    />
-                  </div>
-                )}
-                <h5 className="mx-2">{exp.role}</h5>
+      {experienceArray?.map((exp) => (
+        <ListGroupItem key={exp._id}>
+          <div className="d-flex ">
+            {exp.image && (
+              <div className="mb-2">
+                <img
+                  src={exp.image}
+                  alt="Esperienza"
+                  className="rounded-circle me-3"
+                  style={{
+                    width: "48px",
+                    height: "48px",
+                    objectFit: "cover",
+                  }}
+                />
               </div>
-              <p>
-                {exp.company} - {exp.area}
-              </p>
-              <p>{exp.description}</p>
-              <p>
-                data d'inizio:{" "}
-                {new Date(exp.startDate).toLocaleDateString("it-IT")}
-              </p>
-              <p>
-                data fine:{" "}
-                {exp.endDate
-                  ? new Date(exp.endDate).toLocaleDateString("it-IT")
-                  : "In corso"}
-              </p>
-              <Form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  const fileInput = e.target.elements[`expImage-${exp._id}`];
-                  const file = fileInput.files[0];
-                  if (!file) {
-                    alert("Seleziona un file!");
-                    return;
+            )}
+            <h5 className="mx-2">{exp.role}</h5>
+          </div>
+          <p>
+            {exp.company} - {exp.area}
+          </p>
+          <p>{exp.description}</p>
+          <p>
+            data d'inizio: {new Date(exp.startDate).toLocaleDateString("it-IT")}
+          </p>
+          <p>
+            data fine:{" "}
+            {exp.endDate
+              ? new Date(exp.endDate).toLocaleDateString("it-IT")
+              : "In corso"}
+          </p>
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const fileInput = e.target.elements[`expImage-${exp._id}`];
+              const file = fileInput.files[0];
+              if (!file) {
+                alert("Seleziona un file!");
+                return;
+              }
+
+              const formData = new FormData();
+              formData.append("experience", file);
+
+              fetch(
+                `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences/${exp._id}/picture`,
+                {
+                  method: "POST",
+                  headers: {
+                    Authorization: `Bearer ${pierattiliotoken}`,
+                  },
+                  body: formData,
+                }
+              )
+                .then((response) => {
+                  if (response.ok) {
+                    alert("Immagine caricata con successo!");
+
+                    dispatch(
+                      fetchArrayExperience(
+                        `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`,
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NDU3OWQ0NTE4MTAwMTVjZTgzY2QiLCJpYXQiOjE3NDUzMDcwNTUsImV4cCI6MTc0NjUxNjY1NX0.T2ztF0EcceV08HgbelOhBcrDNgP_xOKHw2GrBZn-vVc"
+                      )
+                    );
+                  } else {
+                    throw new Error("Errore durante l'upload dell'immagine.");
                   }
-
-                  const formData = new FormData();
-                  formData.append("experience", file);
-
-                  fetch(
-                    `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences/${exp._id}/picture`,
-                    {
-                      method: "POST",
-                      headers: {
-                        Authorization: `Bearer ${pierattiliotoken}`,
-                      },
-                      body: formData,
-                    }
-                  )
-                    .then((response) => {
-                      if (response.ok) {
-                        alert("Immagine caricata con successo!");
-
-                        dispatch(
-                          fetchArrayExperience(
-                            `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`,
-                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NDU3OWQ0NTE4MTAwMTVjZTgzY2QiLCJpYXQiOjE3NDUzMDcwNTUsImV4cCI6MTc0NjUxNjY1NX0.T2ztF0EcceV08HgbelOhBcrDNgP_xOKHw2GrBZn-vVc"
-                          )
-                        );
-                      } else {
-                        throw new Error(
-                          "Errore durante l'upload dell'immagine."
-                        );
-                      }
-                    })
-                    .catch((error) => {
-                      console.error("Errore:", error);
-                    });
-                }}
-              >
-                <Form.Group
-                  controlId={`expImage-${exp._id}`}
-                  className="mb-2 mt-3"
-                >
-                  <Form.Label>Carica immagine per questa esperienza</Form.Label>
-                  <Form.Control type="file" accept="image/*" />
-                </Form.Group>
-                <button
-                  type="submit"
-                  className="btn btn-outline-primary btn-sm"
-                >
-                  Upload
-                </button>
-              </Form>
-            </ListGroupItem>
-          ))}
-        </ListGroup>
-      </Col>
-    </>
+                })
+                .catch((error) => {
+                  console.error("Errore:", error);
+                });
+            }}
+          >
+            <Form.Group controlId={`expImage-${exp._id}`} className="mb-2 mt-3">
+              <Form.Label>Carica immagine per questa esperienza</Form.Label>
+              <Form.Control type="file" accept="image/*" />
+            </Form.Group>
+            <button type="submit" className="btn btn-outline-primary btn-sm">
+              Upload
+            </button>
+          </Form>
+        </ListGroupItem>
+      ))}
+    </ListGroup>
   );
 };
 export default Experience;
