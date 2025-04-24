@@ -14,7 +14,7 @@ function Sidebar() {
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NDU3OWQ0NTE4MTAwMTVjZTgzY2QiLCJpYXQiOjE3NDUzMDcwNTUsImV4cCI6MTc0NjUxNjY1NX0.T2ztF0EcceV08HgbelOhBcrDNgP_xOKHw2GrBZn-vVc";
   const getProfile1 = () => {
     fetch(
-      "https://striveschool-api.herokuapp.com/api/profile/68074579d451810015ce83cd",
+      "https://striveschool-api.herokuapp.com/api/profile/680795d2d451810015ce83ee",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -131,7 +131,7 @@ function Sidebar() {
             <img
               className="rounded-circle me-3"
               style={{ width: "48px", height: "48px", objectFit: "cover" }}
-              src={profile?.image || "http://placehold.it/48x48"}
+              src={data?.image || "http://placehold.it/48x48"}
               alt="Profile"
             />
             <div>
