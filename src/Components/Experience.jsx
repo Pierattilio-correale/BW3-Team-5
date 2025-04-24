@@ -240,10 +240,13 @@ const Experience = function () {
                 )}
                 <h5 className="mx-2">{exp.role}</h5>
               </div>
+              <h6>Azienda e Località</h6>
               <p>
                 {exp.company} - {exp.area}
               </p>
+              <h6>Descrizione :</h6>
               <p>{exp.description}</p>
+              <h6>Data :</h6>
               <p>
                 data d'inizio:{" "}
                 {new Date(exp.startDate).toLocaleDateString("it-IT")}
@@ -254,6 +257,7 @@ const Experience = function () {
                   ? new Date(exp.endDate).toLocaleDateString("it-IT")
                   : "In corso"}
               </p>
+              <h6>Carica qui la tua immagine!</h6>
               <Form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -302,7 +306,7 @@ const Experience = function () {
                   controlId={`expImage-${exp._id}`}
                   className="mb-2 mt-3"
                 >
-                  <Form.Label>Carica immagine per questa esperienza</Form.Label>
+                  {/* <Form.Label>Carica immagine per questa esperienza</Form.Label> */}
                   <Form.Control type="file" accept="image/*" />
                 </Form.Group>
                 <button
