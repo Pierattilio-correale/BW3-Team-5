@@ -1,4 +1,7 @@
 import { ListGroup, Button, Row, Col, Image } from "react-bootstrap"
+import { useSelector } from "react-redux"
+
+const profile = useSelector((state) => state.fetch.profile)
 
 function ProfileDetails() {
   return (
@@ -10,7 +13,7 @@ function ProfileDetails() {
             <h6 className="fw-bold mb-1">Attività</h6>
             <p className="text-secondary mb-1">0 follower</p>
             <p className="text-secondary mb-1">
-              Andrea non ha ancora pubblicato nulla
+              {profile.name} non ha ancora pubblicato nulla
             </p>
             <Button variant="link" className="p-0 text-decoration-none">
               Mostra tutte le attività →
