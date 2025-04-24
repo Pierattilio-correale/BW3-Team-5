@@ -2,8 +2,10 @@ import { Button, Col, ListGroup } from "react-bootstrap";
 import "../CSS/sidebar.css";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function Sidebar() {
+  const navigate = useNavigate();
   const profile = useSelector((state) => state.fetch.profile);
   const [data, setData] = useState(null);
   const [data2, setData2] = useState(null);
@@ -133,7 +135,12 @@ function Sidebar() {
               alt="Profile"
             />
             <div>
-              <h6 className="mb-0 name-hover">
+              <h6
+                className="mb-0 name-hover"
+                onClick={() => {
+                  navigate("/details/" + data?._id);
+                }}
+              >
                 {data?.name} {data?.surname}
               </h6>
               <p className="mb-1 small text-secondary">
@@ -162,7 +169,12 @@ function Sidebar() {
               alt="Profile"
             />
             <div>
-              <h6 className="mb-0 name-hover">
+              <h6
+                className="mb-0 name-hover"
+                onClick={() => {
+                  navigate("/details/" + data2?._id);
+                }}
+              >
                 {data2?.name} {data2?.surname}
               </h6>
               <p className="mb-1 small text-secondary">
@@ -192,7 +204,12 @@ function Sidebar() {
               alt="Profile"
             />
             <div>
-              <h6 className="mb-0 name-hover">
+              <h6
+                className="mb-0 name-hover "
+                onClick={() => {
+                  navigate("/details/" + data3?._id);
+                }}
+              >
                 {data3?.name} {data3?.surname}
               </h6>
               <p className="mb-1 small text-secondary">
