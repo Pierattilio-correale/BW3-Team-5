@@ -1,5 +1,13 @@
 import { useParams } from "react-router-dom";
-import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Row,
+  Spinner,
+  ListGroupItem,
+  ListGroup,
+} from "react-bootstrap";
 import "../CSS/sidebar.css";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -10,6 +18,7 @@ const token =
 const Details = function () {
   const profile = useSelector((state) => state.fetch.profile);
   const [data, setData] = useState(null);
+  const [exp, setExp] = useState(null);
   const params = useParams();
 
   const profileDt = () => {
@@ -40,6 +49,34 @@ const Details = function () {
     profileDt();
   }, []);
 
+  const expDt = () => {
+    fetch(
+      `https://striveschool-api.herokuapp.com/api/profile/${params.detID}/experiences`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Errore nella response");
+        }
+      })
+      .then((dataexp) => {
+        setExp(dataexp);
+      })
+      .catch((err) => {
+        console.log("Errore nella promise", err);
+      });
+  };
+
+  useEffect(() => {
+    expDt();
+  }, []);
+
   if (!data) {
     return (
       <div className="d-flex justify-content-center">
@@ -50,7 +87,7 @@ const Details = function () {
 
   return (
     <>
-      <Container className="d-flex justify-content-center mb-5">
+      <Container className="same-width-container mb-5">
         <Row>
           <Col sm={12}>
             <div className="bg-white shadow-sm mb-4 rounded">
@@ -117,7 +154,11 @@ const Details = function () {
                     className="bg-light border p-3 rounded"
                     style={{ minWidth: "350px", maxWidth: "500px" }}
                   >
-                    <strong>Disponibile a lavorare</strong>
+                    <strong>
+                      {data.name === "Luca"
+                        ? "Disponibile a oziare"
+                        : "Disponibile a lavorare"}
+                    </strong>
                     <p className="mb-1 small text-muted">{profile.title}</p>
                     <a href="#" className="text-primary small">
                       Mostra dettagli
@@ -139,6 +180,56 @@ const Details = function () {
                 </div>
               </div>
             </div>
+          </Col>
+        </Row>
+      </Container>
+
+      <Container className="same-width-container mb-5">
+        <Row>
+          <Col sm={12}>
+            <ListGroup className="mb-3">
+              <ListGroup.Item>
+                <h3 className="d-flex justify-content-between">Experience</h3>
+              </ListGroup.Item>
+              {exp?.map((exp) => (
+                <ListGroupItem key={exp._id}>
+                  <div className="d-flex">
+                    {exp.image && (
+                      <div className="mb-2">
+                        <img
+                          src={exp.image}
+                          alt="Esperienza"
+                          className="rounded-circle me-3"
+                          style={{
+                            width: "48px",
+                            height: "48px",
+                            objectFit: "cover",
+                          }}
+                        />
+                      </div>
+                    )}
+                    <h5 className="mx-2">{exp.role}</h5>
+                  </div>
+                  <h6>Azienda e Località</h6>
+                  <p>
+                    {exp.company} - {exp.area}
+                  </p>
+                  <h6>Descrizione :</h6>
+                  <p>{exp.description}</p>
+                  <h6>Data :</h6>
+                  <p>
+                    data d'inizio:{" "}
+                    {new Date(exp.startDate).toLocaleDateString("it-IT")}
+                  </p>
+                  <p>
+                    data fine:{" "}
+                    {exp.endDate
+                      ? new Date(exp.endDate).toLocaleDateString("it-IT")
+                      : "In corso"}
+                  </p>
+                </ListGroupItem>
+              ))}
+            </ListGroup>
           </Col>
         </Row>
       </Container>
