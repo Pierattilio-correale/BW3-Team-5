@@ -13,6 +13,7 @@ import ProfileSection from "./Components/ProfileSection"
 import CompanySearchResults from "./Components/result"
 import ScrollActionBar from "./Components/Scrollbar"
 import ProfileDetails from "./Components/ProfileDetails"
+import Details from "./Components/Details"
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route path="experience/:expID" element={<ExperienceDelite />} />
           <Route path="/results" element={<CompanySearchResults />} />
 
+          <Route path="/details/:detID" element={<Details />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
