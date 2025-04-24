@@ -178,6 +178,17 @@ const Experience = function () {
                   }
                 />
               </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Località</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="es.Milano"
+                  value={formData.area}
+                  onChange={(e) =>
+                    setFormData({ ...formData, area: e.target.value })
+                  }
+                />
+              </Form.Group>
 
               <Form.Group
                 className="mb-3"
