@@ -27,7 +27,7 @@ function App() {
                 <Row>
                   <Col
                     sm={12}
-                    md={9}
+                    lg={9}
                     className="d-flex flex-column align-items-center"
                   >
                     <ProfileSection />

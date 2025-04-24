@@ -6,7 +6,7 @@ const ProfileSection = () => {
   const profile = useSelector((state) => state.fetch.profile);
 
   return (
-    <div className="bg-white shadow-sm mb-4 rounded ">
+    <div className="bg-white shadow-sm mb-4 rounded w-75">
       {/* Cover */}
       <div
         style={{
@@ -70,10 +70,7 @@ const ProfileSection = () => {
 
         {/* Box disponibili a lavorare  ecc*/}
         <div className="d-flex mt-4 flex-wrap gap-3 ">
-          <div
-            className="bg-light border p-3 rounded "
-            style={{ minWidth: "350px", maxWidth: "500px" }}
-          >
+          <div className="flex-grow-1 flex-basis-0 p-3 border rounded bg-light">
             <strong>Disponibile a lavorare</strong>
             <p className="mb-1 small text-muted">{profile.title}</p>
             <a href="#" className="text-primary small">
@@ -81,10 +78,7 @@ const ProfileSection = () => {
             </a>
           </div>
 
-          <div
-            className="bg-light border p-3 rounded  "
-            style={{ minWidth: "300px", maxWidth: "500px" }}
-          >
+          <div className="flex-grow-1 flex-basis-0 p-3 border rounded bg-light ">
             <p className="mb-1 small">
               Fai sapere che stai facendo selezione e attrai candidati
               qualificati.
