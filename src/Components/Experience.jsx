@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchArrayAction } from "../Redux/Action";
 import { fetchArrayExperience } from "../Redux/Action";
 import { useNavigate } from "react-router-dom";
+import "../CSS/res.css";
 
 const pierattiliotoken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NDU3OWQ0NTE4MTAwMTVjZTgzY2QiLCJpYXQiOjE3NDUzMDcwNTUsImV4cCI6MTc0NjUxNjY1NX0.T2ztF0EcceV08HgbelOhBcrDNgP_xOKHw2GrBZn-vVc";
@@ -89,7 +90,7 @@ const Experience = function () {
   };
 
   return (
-    <ListGroup className="mb-3 shadow-sm rounded w-75">
+    <ListGroup className="mb-3 shadow-sm rounded w-responsive">
       <ListGroup.Item>
         <h3 className="d-flex justify-content-between">
           Experience

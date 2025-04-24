@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Spinner, Form } from "react-bootstrap";
 import { fetchArrayAction } from "../Redux/Action";
+import "../CSS/res.css";
 
 const ProfileSection = () => {
   const dispatch = useDispatch();
@@ -57,7 +58,7 @@ const ProfileSection = () => {
   };
 
   return (
-    <div className="bg-white shadow-sm mb-4 rounded w-75">
+    <div className="bg-white shadow-sm mb-4 rounded w-responsive">
       {/* Cover */}
       <div style={{ height: "200px", overflow: "hidden" }}>
         <img
