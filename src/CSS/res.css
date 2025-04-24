@@ -1,0 +1,11 @@
+.w-responsive {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 992px) {
+  .w-responsive {
+    width: 65%;
+  }
+}

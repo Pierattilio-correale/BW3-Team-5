@@ -12,9 +12,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchArrayAction } from "../Redux/Action";
 import { fetchArrayExperience } from "../Redux/Action";
 import { useNavigate } from "react-router-dom";
+import "../CSS/res.css";
 
 const pierattiliotoken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NWRkM2Q0NTE4MTAwMTVjZTgzZDQiLCJpYXQiOjE3NDUzMTMyMzYsImV4cCI6MTc0NjUyMjgzNn0.1nb5bTwFZyxSFdHoFu9ITxAAdGeQ6LtV1ZolKHc4D88";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NDU3OWQ0NTE4MTAwMTVjZTgzY2QiLCJpYXQiOjE3NDUzMDcwNTUsImV4cCI6MTc0NjUxNjY1NX0.T2ztF0EcceV08HgbelOhBcrDNgP_xOKHw2GrBZn-vVc";
 
 const Experience = function () {
   const dispatch = useDispatch();
@@ -35,7 +36,10 @@ const Experience = function () {
 
   useEffect(() => {
     dispatch(
-      fetchArrayAction("https://striveschool-api.herokuapp.com/api/profile/me")
+      fetchArrayAction(
+        "https://striveschool-api.herokuapp.com/api/profile/me",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NDU3OWQ0NTE4MTAwMTVjZTgzY2QiLCJpYXQiOjE3NDUzMDcwNTUsImV4cCI6MTc0NjUxNjY1NX0.T2ztF0EcceV08HgbelOhBcrDNgP_xOKHw2GrBZn-vVc"
+      )
     );
   }, [dispatch]);
 
@@ -43,7 +47,8 @@ const Experience = function () {
     if (profile && profile._id) {
       dispatch(
         fetchArrayExperience(
-          `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`
+          `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`,
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NDU3OWQ0NTE4MTAwMTVjZTgzY2QiLCJpYXQiOjE3NDUzMDcwNTUsImV4cCI6MTc0NjUxNjY1NX0.T2ztF0EcceV08HgbelOhBcrDNgP_xOKHw2GrBZn-vVc"
         )
       );
     }
@@ -72,7 +77,8 @@ const Experience = function () {
         handleClose();
         dispatch(
           fetchArrayExperience(
-            `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`
+            `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`,
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NDU3OWQ0NTE4MTAwMTVjZTgzY2QiLCJpYXQiOjE3NDUzMDcwNTUsImV4cCI6MTc0NjUxNjY1NX0.T2ztF0EcceV08HgbelOhBcrDNgP_xOKHw2GrBZn-vVc"
           )
         );
       } else {
@@ -82,153 +88,231 @@ const Experience = function () {
       console.error(err);
     }
   };
+
   return (
-    <>
-      <Col sm={9} className="">
-        <ListGroup className="mb-3 ms-3">
-          <ListGroup.Item>
-            <h3 className="d-flex justify-content-between">
-              Experience
-              <div>
-                <a href="#" onClick={handleShow} className="text-dark me-4">
-                  <i class="bi bi-plus-lg"></i>
-                </a>
-                <a
-                  className="text-dark mx-3"
-                  onClick={() => {
-                    navigate("/experience/" + profile._id);
-                  }}
-                >
-                  <i
-                    className="bi bi-pencil"
-                    style={{ fontSize: "1.4rem" }}
-                  ></i>
-                </a>
+    <ListGroup className="mb-3 shadow-sm rounded w-responsive">
+      <ListGroup.Item>
+        <h3 className="d-flex justify-content-between">
+          Experience
+          <div>
+            <a href="#" onClick={handleShow} className="text-dark me-4">
+              <i className="bi bi-plus-lg"></i>
+            </a>
+            <a
+              className="text-dark mx-3"
+              onClick={() => {
+                navigate("/experience/" + profile._id);
+              }}
+            >
+              <i className="bi bi-pencil" style={{ fontSize: "1.4rem" }}></i>
+            </a>
+          </div>
+        </h3>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Aggiungi la tua esperienza!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group className="mb-3">
+                <Form.Label>Qualifica</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="es.Programmatore"
+                  value={formData.role}
+                  onChange={(e) =>
+                    setFormData({ ...formData, role: e.target.value })
+                  }
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Azienda o Organizzatore</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="azienda"
+                  value={formData.company}
+                  onChange={(e) =>
+                    setFormData({ ...formData, company: e.target.value })
+                  }
+                />
+              </Form.Group>
+
+              <div className="d-flex justify-content-between mx-3 mb-3">
+                <Form.Group className="me-2 flex-fill">
+                  <Form.Label>Data inizio</Form.Label>
+                  <Form.Control
+                    type="date"
+                    value={formData.startDate}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        startDate: e.target.value,
+                      })
+                    }
+                  />
+                </Form.Group>
+                <Form.Group className="ms-2 flex-fill">
+                  <Form.Label>Data fine</Form.Label>
+                  <Form.Control
+                    type="date"
+                    value={formData.endDate}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        endDate: e.target.value,
+                      })
+                    }
+                  />
+                </Form.Group>
               </div>
-            </h3>
-            <Modal show={show} onHide={handleClose}>
-              <Modal.Header closeButton>
-                <Modal.Title>Aggiungi la tua esperienza!</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <Form>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Qualifica</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="es.Programmatore"
-                      value={formData.role}
-                      onChange={(e) =>
-                        setFormData({ ...formData, role: e.target.value })
-                      }
-                    />
-                  </Form.Group>
 
-                  <Form.Group className="mb-3">
-                    <Form.Label>Azienda o Organizzatore</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="azienda"
-                      value={formData.company}
-                      onChange={(e) =>
-                        setFormData({ ...formData, company: e.target.value })
-                      }
-                    />
-                  </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Località</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="es.Milano"
+                  value={formData.area}
+                  onChange={(e) =>
+                    setFormData({ ...formData, area: e.target.value })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Località</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="es.Milano"
+                  value={formData.area}
+                  onChange={(e) =>
+                    setFormData({ ...formData, area: e.target.value })
+                  }
+                />
+              </Form.Group>
 
-                  <div className="d-flex justify-content-between mx-3 mb-3">
-                    <Form.Group className="me-2 flex-fill">
-                      <Form.Label>Data inizio</Form.Label>
-                      <Form.Control
-                        type="date"
-                        value={formData.startDate}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            startDate: e.target.value,
-                          })
-                        }
-                      />
-                    </Form.Group>
-                    <Form.Group className="ms-2 flex-fill">
-                      <Form.Label>Data fine</Form.Label>
-                      <Form.Control
-                        type="date"
-                        value={formData.endDate}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            endDate: e.target.value,
-                          })
-                        }
-                      />
-                    </Form.Group>
-                  </div>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlTextarea1"
+              >
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  value={formData.description}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      description: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <a
+              className="btn btn-primary rounded-5 pt-1 px-3"
+              onClick={FormPUT}
+            >
+              Save
+            </a>
+          </Modal.Footer>
+        </Modal>
+      </ListGroup.Item>
+      {isLoading && (
+        <div className="d-flex justify-content-center">
+          <Spinner variant="primary" animation="border"></Spinner>
+        </div>
+      )}
+      {isError && (
+        <Alert variant="danger">Errore nel recupero della lista</Alert>
+      )}
 
-                  <Form.Group className="mb-3">
-                    <Form.Label>Località</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="es.Milano"
-                      value={formData.area}
-                      onChange={(e) =>
-                        setFormData({ ...formData, area: e.target.value })
-                      }
-                    />
-                  </Form.Group>
+      {experienceArray?.map((exp) => (
+        <ListGroupItem key={exp._id}>
+          <div className="d-flex ">
+            {exp.image && (
+              <div className="mb-2">
+                <img
+                  src={exp.image}
+                  alt="Esperienza"
+                  className="rounded-circle me-3"
+                  style={{
+                    width: "48px",
+                    height: "48px",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+            )}
+            <h5 className="mx-2">{exp.role}</h5>
+          </div>
+          <p>
+            {exp.company} - {exp.area}
+          </p>
+          <p>{exp.description}</p>
+          <p>
+            data d'inizio: {new Date(exp.startDate).toLocaleDateString("it-IT")}
+          </p>
+          <p>
+            data fine:{" "}
+            {exp.endDate
+              ? new Date(exp.endDate).toLocaleDateString("it-IT")
+              : "In corso"}
+          </p>
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const fileInput = e.target.elements[`expImage-${exp._id}`];
+              const file = fileInput.files[0];
+              if (!file) {
+                alert("Seleziona un file!");
+                return;
+              }
 
-                  <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlTextarea1"
-                  >
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control
-                      as="textarea"
-                      rows={3}
-                      value={formData.description}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          description: e.target.value,
-                        })
-                      }
-                    />
-                  </Form.Group>
-                </Form>
-              </Modal.Body>
-              <Modal.Footer>
-                <a
-                  className="btn btn-primary rounded-5 pt-1 px-3"
-                  onClick={FormPUT}
-                >
-                  Save
-                </a>
-              </Modal.Footer>
-            </Modal>
-          </ListGroup.Item>
-          {isLoading && (
-            <div className="d-flex justify-content-center">
-              <Spinner variant="primary" animation="border"></Spinner>
-            </div>
-          )}
-          {isError && (
-            <Alert variant="danger">Errore nel recupero della lista</Alert>
-          )}
+              const formData = new FormData();
+              formData.append("experience", file);
 
-          {experienceArray?.map((exp) => (
-            <ListGroupItem key={exp._id}>
-              <h5>{exp.role}</h5>
-              <p>
-                {exp.company} - {exp.area}
-              </p>
-              <p>{exp.description}</p>
-              <p>data d'inizio {exp.startDate}</p>
-              <p>data fine : {exp.endDate || "In corso"}</p>
-            </ListGroupItem>
-          ))}
-        </ListGroup>
-      </Col>
-    </>
+              fetch(
+                `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences/${exp._id}/picture`,
+                {
+                  method: "POST",
+                  headers: {
+                    Authorization: `Bearer ${pierattiliotoken}`,
+                  },
+                  body: formData,
+                }
+              )
+                .then((response) => {
+                  if (response.ok) {
+                    alert("Immagine caricata con successo!");
+
+                    dispatch(
+                      fetchArrayExperience(
+                        `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`,
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NDU3OWQ0NTE4MTAwMTVjZTgzY2QiLCJpYXQiOjE3NDUzMDcwNTUsImV4cCI6MTc0NjUxNjY1NX0.T2ztF0EcceV08HgbelOhBcrDNgP_xOKHw2GrBZn-vVc"
+                      )
+                    );
+                  } else {
+                    throw new Error("Errore durante l'upload dell'immagine.");
+                  }
+                })
+                .catch((error) => {
+                  console.error("Errore:", error);
+                });
+            }}
+          >
+            <Form.Group controlId={`expImage-${exp._id}`} className="mb-2 mt-3">
+              <Form.Label>Carica immagine per questa esperienza</Form.Label>
+              <Form.Control type="file" accept="image/*" />
+            </Form.Group>
+            <button type="submit" className="btn btn-outline-primary btn-sm">
+              Upload
+            </button>
+          </Form>
+        </ListGroupItem>
+      ))}
+    </ListGroup>
   );
 };
 export default Experience;
