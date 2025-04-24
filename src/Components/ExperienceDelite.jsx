@@ -147,10 +147,13 @@ const ExperienceDelite = function () {
                 )}
                 <h5 className="mx-2">{exp.role}</h5>
               </div>
+              <h5>Azienda e Località</h5>
               <p>
                 {exp.company} - {exp.area}
               </p>
+              <h5>Descrizione</h5>
               <p>{exp.description}</p>
+              <h5>Data</h5>
               <p>
                 data d'inizio:{" "}
                 {new Date(exp.startDate).toLocaleDateString("it-IT")}
