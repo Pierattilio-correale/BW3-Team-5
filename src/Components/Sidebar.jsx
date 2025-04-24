@@ -139,7 +139,7 @@ function Sidebar() {
 
   return (
     <Col sm={12} lg={3}>
-      <ListGroup className="mb-3 ms-3">
+      <ListGroup className="mb-3 ms-0 ms-lg-3 mt-3">
         <ListGroup.Item>
           <h3 className="d-flex justify-content-between">
             Lingua del profilo <i className="bi bi-pen"></i>
@@ -156,7 +156,7 @@ function Sidebar() {
         </ListGroup.Item>
       </ListGroup>
 
-      <ListGroup className="ms-3">
+      <ListGroup className="ms-0 ms-lg-3">
         <ListGroup.Item>
           <h6>Persone che potresti conoscere</h6>
           <p className="text-secondary">Dalla tua scuola o università</p>
