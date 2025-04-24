@@ -74,7 +74,7 @@ function MyNavbar() {
         return;
       }
   
-      // Caso normale
+      // Caso normale (cerca lavori)
       const response = await fetch(
         `https://strive-benchmark.herokuapp.com/api/jobs?company=${searchTerm}`
       );
