@@ -315,10 +315,11 @@ function MyNavbar() {
                 <FaUserFriends size={30} className="glow-icon" />
                 <span className="d-none d-lg-block text-secondary">Rete</span>
               </Nav.Link>
-              <NavItem
-                icon={<FaBriefcase size={30} className="glow-icon" />}
-                label="Lavoro"
-              />
+            <Nav.Link as={Link} to="/dev" className="d-flex flex-column align-items-center">
+  <FaBriefcase size={30} className="glow-icon" />
+  <span className="d-none d-lg-block text-secondary">Lavoro</span>
+</Nav.Link>
+
               <Nav.Link
                 href="https://discord.com"
                 target="_blank"
