@@ -76,7 +76,7 @@ function MyNavbar() {
   
       // Caso normale (cerca lavori)
       const response = await fetch(
-        `https://strive-benchmark.herokuapp.com/api/jobs?company=${searchTerm}`
+        `https://strive-benchmark.herokuapp.com/api/jobs?search=${searchTerm}`
       );
       if (response.ok) {
         const { data } = await response.json();
