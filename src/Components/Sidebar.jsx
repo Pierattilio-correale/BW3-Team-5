@@ -10,6 +10,7 @@ function Sidebar() {
   const [data, setData] = useState(null);
   const [data2, setData2] = useState(null);
   const [data3, setData3] = useState(null);
+  const [data4, setData4] = useState(null);
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NDU3OWQ0NTE4MTAwMTVjZTgzY2QiLCJpYXQiOjE3NDUzMDcwNTUsImV4cCI6MTc0NjUxNjY1NX0.T2ztF0EcceV08HgbelOhBcrDNgP_xOKHw2GrBZn-vVc";
   const getProfile1 = () => {
@@ -93,6 +94,40 @@ function Sidebar() {
   };
   useEffect(() => {
     getProfile3();
+  }, []);
+
+  function truncateText(text, maxLength = 63) {
+    if (!text) return "";
+    return text.length > maxLength
+      ? text.slice(0, maxLength - 3) + "..."
+      : text;
+  }
+  const getProfile4 = () => {
+    fetch(
+      "https://striveschool-api.herokuapp.com/api/profile/680a373f1f35cf0015517a67",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("errore nella fetch");
+        }
+      })
+      .then((data4) => {
+        console.log(data4);
+        setData4(data4);
+      })
+      .catch((err) => {
+        console.log("errore nella promis", err);
+      });
+  };
+  useEffect(() => {
+    getProfile4();
   }, []);
 
   function truncateText(text, maxLength = 63) {
@@ -219,6 +254,40 @@ function Sidebar() {
                 {truncateText(data3?.bio)}
               </p>
               <p className="mb-1 small text-secondary">📍 {data3?.area}</p>
+              <Button
+                className="rounded-pill"
+                variant="outline-secondary"
+                size="sm"
+              >
+                <i className="bi bi-person-fill-add"></i> Collegati
+              </Button>
+            </div>
+          </div>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <div className="d-flex align-items-start">
+            <img
+              className="rounded-circle me-3"
+              style={{ width: "48px", height: "48px", objectFit: "cover" }}
+              src={data4?.image || "http://placehold.it/48x48"}
+              alt="Profile"
+            />
+            <div>
+              <h6
+                className="mb-0 name-hover "
+                onClick={() => {
+                  navigate("/details/" + data4?._id);
+                }}
+              >
+                {data4?.name} {data4?.surname}
+              </h6>
+              <p className="mb-1 small text-secondary">
+                {truncateText(data4?.title)}
+              </p>
+              <p className="mb-1 small text-secondary">
+                {truncateText(data4?.bio)}
+              </p>
+              <p className="mb-1 small text-secondary">📍 {data4?.area}</p>
               <Button
                 className="rounded-pill"
                 variant="outline-secondary"

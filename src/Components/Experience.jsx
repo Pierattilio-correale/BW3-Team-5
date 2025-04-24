@@ -245,12 +245,16 @@ const Experience = function () {
                 />
               </div>
             )}
+
             <h5 className="mx-2">{exp.role}</h5>
           </div>
+          <h5>Località e Azienda</h5>
           <p>
             {exp.company} - {exp.area}
           </p>
+          <h5>Descrizione</h5>
           <p>{exp.description}</p>
+          <h5>Data</h5>
           <p>
             data d'inizio: {new Date(exp.startDate).toLocaleDateString("it-IT")}
           </p>
@@ -303,7 +307,9 @@ const Experience = function () {
             }}
           >
             <Form.Group controlId={`expImage-${exp._id}`} className="mb-2 mt-3">
-              <Form.Label>Carica immagine per questa esperienza</Form.Label>
+              <Form.Label className=" fw-bold">
+                Carica immagine per questa esperienza
+              </Form.Label>
               <Form.Control type="file" accept="image/*" />
             </Form.Group>
             <button type="submit" className="btn btn-outline-primary btn-sm">
