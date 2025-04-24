@@ -228,10 +228,10 @@ const Details = function () {
         </Row>
       </Container>
 
-      <Container className="same-width-container mb-5">
+      <Container className="same-width-container mb-5 p-0">
         <Row>
           <Col sm={12}>
-            <div className="mx-3">
+            <div className="mx-2">
               <ListGroup className="mb-3">
                 <ListGroup.Item>
                   <h6 className="fw-bold mb-1">Attività</h6>

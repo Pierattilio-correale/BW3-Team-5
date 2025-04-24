@@ -25,7 +25,7 @@ function App() {
         <div className="d-flex flex-column min-vh-100">
           <MyNavbar />
           <ScrollActionBar />
-          <main className="flex-grow-1 container mt-4">
+          <main className="flex-grow-1 ">
             <Routes>
               <Route
                 path="/"
@@ -54,6 +54,7 @@ function App() {
             </Routes>
             <Messaggistica />
           </main>
+
           <Footer />
         </div>
       </BrowserRouter>

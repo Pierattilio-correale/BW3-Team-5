@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import {
   InputGroup,
   Image,
@@ -8,24 +8,27 @@ import {
   Collapse,
   Card,
   Modal,
-} from "react-bootstrap"
-import "../CSS/MessagingBar.css"
+} from "react-bootstrap";
+import "../CSS/MessagingBar.css";
+import { useSelector } from "react-redux";
 
 const Messaggistica = () => {
-  const [open, setOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState("")
-  const [showProfiles, setShowProfiles] = useState(false)
+  const profile = useSelector((state) => state.fetch.profile);
+
+  const [open, setOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showProfiles, setShowProfiles] = useState(false);
 
   const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value)
-  }
+    setSearchQuery(e.target.value);
+  };
 
   return (
     <div className="messaging-bar rounded-2">
       <div className="messaging-header rounded-2 d-flex align-items-center justify-content-between gap-2 p-2">
         <div className="profile-circle">
           <Image
-            src="https://www.firenzetoday.it/~media/horizontal-hi/27451125288350/schermata-2020-10-06-alle-18-05-04-2.jpg"
+            src={profile.image}
             alt="Profilo"
             roundedCircle
             className="profile-image"
@@ -167,7 +170,7 @@ const Messaggistica = () => {
         </div>
       </Collapse>
     </div>
-  )
-}
+  );
+};
 
-export default Messaggistica
+export default Messaggistica;

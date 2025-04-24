@@ -1,31 +1,31 @@
-import { Container, Row, Col, Dropdown } from "react-bootstrap"
-import React, { useState, useEffect } from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faGear } from "@fortawesome/free-solid-svg-icons"
-import "../CSS/footer.css"
-import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons"
-import { faShield } from "@fortawesome/free-solid-svg-icons"
+import { Container, Row, Col, Dropdown } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
+import "../CSS/footer.css";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { faShield } from "@fortawesome/free-solid-svg-icons";
 
 const Footer = function () {
   const [selectedLanguage, setSelectedLanguage] = useState(
     localStorage.getItem("language") || "Seleziona lingua"
-  )
+  );
 
   const handleLanguageChange = (language) => {
-    setSelectedLanguage(language)
-    localStorage.setItem("language", language)
-  }
+    setSelectedLanguage(language);
+    localStorage.setItem("language", language);
+  };
 
   useEffect(() => {
-    const savedLanguage = localStorage.getItem("language")
+    const savedLanguage = localStorage.getItem("language");
     if (savedLanguage) {
-      setSelectedLanguage(savedLanguage)
+      setSelectedLanguage(savedLanguage);
     }
-  }, [])
+  }, []);
 
   return (
     <>
-      <Container className="linkedin-footer">
+      <Container className="linkedin-footer mt-5">
         <Row className="d-flex justify-content-center">
           <Col sm={12} md={2} className="mb-3">
             <ul className="list-unstyled">
@@ -214,7 +214,7 @@ const Footer = function () {
         </Row>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
