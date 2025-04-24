@@ -1,9 +1,8 @@
-import { ListGroup, Button, Row, Col, Image } from "react-bootstrap"
-import { useSelector } from "react-redux"
-
-const profile = useSelector((state) => state.fetch.profile)
+import { ListGroup, Button, Row, Col, Image } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 function ProfileDetails() {
+  const profile = useSelector((state) => state.fetch.profile);
   return (
     <Col sm={12} lg={9}>
       <div className="mx-3">
@@ -99,7 +98,7 @@ function ProfileDetails() {
         </ListGroup>
       </div>
     </Col>
-  )
+  );
 }
 
-export default ProfileDetails
+export default ProfileDetails;

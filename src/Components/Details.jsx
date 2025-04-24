@@ -7,6 +7,7 @@ import {
   Spinner,
   ListGroupItem,
   ListGroup,
+  Image,
 } from "react-bootstrap";
 import "../CSS/sidebar.css";
 import { useSelector } from "react-redux";
@@ -45,10 +46,6 @@ const Details = function () {
       });
   };
 
-  useEffect(() => {
-    profileDt();
-  }, []);
-
   const expDt = () => {
     fetch(
       `https://striveschool-api.herokuapp.com/api/profile/${params.detID}/experiences`,
@@ -74,6 +71,7 @@ const Details = function () {
   };
 
   useEffect(() => {
+    profileDt();
     expDt();
   }, []);
 
@@ -91,7 +89,6 @@ const Details = function () {
         <Row>
           <Col sm={12}>
             <div className="bg-white shadow-sm mb-4 rounded">
-              {/* Cover */}
               <div style={{ height: "200px", overflow: "hidden" }}>
                 <img
                   src={data.image}
@@ -101,7 +98,6 @@ const Details = function () {
                 />
               </div>
 
-              {/* Immagine profilo e dettagli */}
               <div
                 className="px-4 pt-0 pb-4 position-relative"
                 style={{ marginTop: "-50px" }}
@@ -135,7 +131,6 @@ const Details = function () {
                   </div>
                 </div>
 
-                {/* Bottoni profilo */}
                 <div className="d-flex flex-wrap gap-2 mt-3">
                   <Button variant="primary" className="rounded-pill">
                     Collegati
@@ -148,8 +143,7 @@ const Details = function () {
                   </Button>
                 </div>
 
-                {/* Box info */}
-                <div className="d-flex mt-4 flex-wrap gap-3">
+                <div className="d-flex mt-4 flex-wrap gap-3 ">
                   <div
                     className="bg-light border p-3 rounded"
                     style={{ minWidth: "350px", maxWidth: "500px" }}
@@ -159,8 +153,8 @@ const Details = function () {
                         ? "Disponibile a oziare"
                         : "Disponibile a lavorare"}
                     </strong>
-                    <p className="mb-1 small text-muted">{profile.title}</p>
-                    <a href="#" className="text-primary small">
+
+                    <a href="#" className="text-primary small d-block">
                       Mostra dettagli
                     </a>
                   </div>
@@ -230,6 +224,122 @@ const Details = function () {
                 </ListGroupItem>
               ))}
             </ListGroup>
+          </Col>
+        </Row>
+      </Container>
+
+      <Container className="same-width-container mb-5">
+        <Row>
+          <Col sm={12}>
+            <div className="mx-3">
+              <ListGroup className="mb-3">
+                <ListGroup.Item>
+                  <h6 className="fw-bold mb-1">Attività</h6>
+                  <p className="text-secondary mb-1">0 follower</p>
+                  <p className="text-secondary mb-1">
+                    <strong>{data.name}</strong> non ha ancora pubblicato nulla
+                  </p>
+                  <Button variant="link" className="p-0 text-decoration-none">
+                    Mostra tutte le attività →
+                  </Button>
+                </ListGroup.Item>
+              </ListGroup>
+
+              <ListGroup className="mb-3">
+                <ListGroup.Item>
+                  <h6 className="fw-bold mb-2">Formazione</h6>
+                  <div className="d-flex align-items-center">
+                    <Image
+                      src="https://s3-eu-west-1.amazonaws.com/tpd/logos/62a6277627ee655c1226b624/0x0.png"
+                      alt="EPICODE"
+                      style={{
+                        width: "32px",
+                        height: "32px",
+                        marginRight: "10px",
+                      }}
+                    />
+                    <div>
+                      <strong className="d-block">EPICODE</strong>
+                      <small className="text-secondary">2024 - 2025</small>
+                    </div>
+                  </div>
+                </ListGroup.Item>
+              </ListGroup>
+
+              <ListGroup className="d-flex">
+                <ListGroup.Item>
+                  <h6 className="fw-bold mb-2">Interessi</h6>
+                  <div className="d-flex mb-2">
+                    <Button
+                      variant="link"
+                      className="p-0 me-3 text-success fw-bold text-decoration-none"
+                    >
+                      Aziende
+                    </Button>
+                    <Button
+                      variant="link"
+                      className="p-0 text-secondary text-decoration-none"
+                    >
+                      Scuole o università
+                    </Button>
+                  </div>
+
+                  <div className="d-flex mb-3">
+                    <Image
+                      src="https://media.licdn.com/dms/image/v2/C4D0BAQH_sxPLw-Vfjw/company-logo_200_200/company-logo_200_200/0/1630574580547/linkedin_notizie_logo?e=2147483647&v=beta&t=4NZLVtRQ3Cn3dpXx6Mnd4zWdV1qzKb6IAU_XLo_DTsQ"
+                      alt="LinkedIn Notizie"
+                      roundedCircle
+                      style={{
+                        width: "48px",
+                        height: "48px",
+                        marginRight: "10px",
+                      }}
+                    />
+                    <div>
+                      <strong className="d-block">LinkedIn Notizie</strong>
+                      <small className="text-secondary">
+                        1.034.177 follower
+                      </small>
+                      <div>
+                        <Button
+                          variant="outline-dark"
+                          size="sm"
+                          className="mt-1"
+                        >
+                          + Segui
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="d-flex">
+                    <Image
+                      src="https://s3-eu-west-1.amazonaws.com/tpd/logos/62a6277627ee655c1226b624/0x0.png"
+                      alt="EPICODE"
+                      roundedCircle
+                      style={{
+                        width: "48px",
+                        height: "48px",
+                        marginRight: "10px",
+                      }}
+                    />
+                    <div>
+                      <strong className="d-block">EPICODE</strong>
+                      <small className="text-secondary">19.220 follower</small>
+                      <div>
+                        <Button
+                          variant="outline-dark"
+                          size="sm"
+                          className="mt-1"
+                        >
+                          + Segui
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </ListGroup.Item>
+              </ListGroup>
+            </div>
           </Col>
         </Row>
       </Container>
