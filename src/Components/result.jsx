@@ -18,7 +18,7 @@ const CompanySearchResults = () => {
 
   return (
     <div className="container mt-4">
-      <h2>Risultati per azienda</h2>
+      <h2 className='text-center text-primary'>Posizioni aperte </h2>
       <ul className="list-unstyled">
         {jobs.map((job) => (
           <li key={job._id} className="mb-3 d-flex align-items-center justify-content-between">

@@ -78,8 +78,8 @@ function MyNavbar() {
       const response = await fetch(
         `https://strive-benchmark.herokuapp.com/api/jobs?search=${searchTerm}`
       );
-      if (response.ok) {
-        const { data } = await response.json();
+      if (response.ok) { 
+        const { data } = await response.json(); console.log("Dati ricevuti:", data);
         navigate(`/results?company=${searchTerm}`, { state: { jobs: data } });
       } else {
         alert("Errore durante la fetch");
@@ -269,7 +269,7 @@ function MyNavbar() {
 </Col>
 <Col md={5} className="d-none d-lg-block ms-lg-5 ps-lg-5 fs-6">
 
-            <Nav className="d-flex justify-content-between justify-content-lg-start align-items-center gap-lg-5 ps-2 ps-lg-2 mt-3 py-0" navbarScroll>
+            <Nav className="d-flex justify-content-between justify-content-lg-start align-items-center gap-lg-4 ps-2 ps-lg-3 mt-3 py-0" navbarScroll>
             <Nav.Link as={Link} to="/" className="d-flex flex-column align-items-center">
   <FaHome size={30} className="glow-icon" />
   <span className="d-none d-lg-block text-secondary">Home</span>
@@ -330,15 +330,15 @@ function MyNavbar() {
             </Nav>
           </Col>
 
-          {/* Aziende + Link Rosso - solo desktop */}
-          <Col md={2} className="d-none d-lg-flex text-secondary mt-2 border-start border-secondary ps-2 g-4" ref={businessRef}>
+          {/* Colonna in fondo a destra- solo desktop */}
+          <Col md={2} className="d-none d-xxl-flex text-secondary mt-2 border-start border-secondary ps-2 g-4" ref={businessRef}>
             <div
               className="position-relative d-flex flex-column align-items-center text-secondary mt-2"
               style={{ cursor: "pointer" }}
               onClick={() => setShowBusinessDropdown(!showBusinessDropdown)}
             >
-              <IoMdGrid size={35} className="mt-1 glow-icon" />
-              <div className="d-none d-lg-flex align-items-center justify-content-center gap-1 mt-2">
+              <IoMdGrid size={30} className="mt-1 glow-icon" />
+              <div className="d-none d-lg-flex align-items-center justify-content-center gap-1 mt-1">
                 <span>Aziende</span>
                 <FaChevronDown size={10} />
               </div>
