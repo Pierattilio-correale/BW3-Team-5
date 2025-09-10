@@ -1,12 +1,34 @@
-# React + Vite
+🚀 Clone di LinkedIn
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+👨‍💻 Progetto realizzato insieme a un team di compagni straordinari:
+✨ Luca, 🌟 Stella, 🧑‍💻 Andrea, 🎯 Felice
 
-Currently, two official plugins are available:
+Abbiamo sviluppato una replica del sito web LinkedIn utilizzando:
+⚛️ React per la struttura del front-end
+🛠️ Redux per la gestione dello stato globale
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🎨 L'obiettivo era quello di ricreare un'esperienza il più possibile simile a LinkedIn, mettendo in pratica le nostre competenze di sviluppo web e lavoro di squadra.
 
-## Expanding the ESLint configuration
+🔧 Funzionalità principali
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+✅ Registrazione e login utente
+✅ Feed con post dinamici
+✅ Profilo personale personalizzabile
+✅ Ricerca utenti
+
+📚 Tecnologie utilizzate
+
+⚛️ React
+
+🛠️ Redux
+
+🎨 CSS/Styled Components
+
+🌐 API REST per i dati
+
+🌟 Cosa abbiamo imparato
+
+💡 Come collaborare in team su un unico progetto
+💡 Best practice nello sviluppo con React e Redux
+💡 Gestione dello stato e della UI complessa
+💡 Migliorare la comunicazione e l’organizzazione del lavoro
